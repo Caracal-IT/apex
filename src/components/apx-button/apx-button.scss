@@ -1,0 +1,31 @@
+button {
+    cursor: pointer;
+    color: var(--primary-font-color, white);
+    background-color: var(--primary-color, purple);
+    
+    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    border-radius: var(--border-radius-button, 5px);
+    
+    padding: .4rem;
+    margin: 0 .1rem;
+
+    font: inherit;
+    font-size: 1.3rem;
+
+    min-width: 9rem;
+
+    &:hover {
+        color: var(--primary-light-font-color, white);
+        background-color: var(--primary-light-color, plum);
+        box-shadow: var(--shadow-medium, 3px 4px 4px rgba(0, 0, 0, .5));
+    }
+
+    &:active:hover{
+        box-shadow: var(--shadow-light, 3px 2px 2px rgba(0, 0, 0, .5));
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: var(--shadow-medium, 3px 4px 4px rgba(0, 0, 0, .5));
+    }
+}

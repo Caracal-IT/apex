@@ -1,0 +1,38 @@
+:host {
+    display: block;
+}
+
+input {
+    display: block;
+
+    margin: 5px 1px;
+    padding: .6rem .4rem .6rem .4rem;
+    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    border-radius: var(--border-radius-input, 10px);;
+
+    font: inherit;
+    font-size: 1.2rem;
+    color: var(--text-color, black);
+    background-color: var(--input-background, white);
+
+    width: 100%;
+
+    &:focus {
+        outline: none;
+        margin: 4px 0;
+        border: var(--border-heavy-style, 2px solid) var(--primary-color, purple);
+    }
+
+    &[error="true"]{
+        margin: 4px 0;
+        border: 2px solid var(--color-color, red);
+
+        background-color: var(--error-color, lightpink);
+    }
+}
+
+label {
+    font: inherit;
+    font-size: 1rem;
+    color: var(--primary-color, purple);
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"content="ie=edge">
+    <title>Apex Workflow Components</title>   
+    
+    <script src="polaris_web_components/workflow.js?v1.0.6"></script>
+    
+    <script nomodule src="webcomponents/webcomponents-loader.js"></script>
+</head>
+ 
+<body>
+    <style></style>
+    <style>
+        #theme {
+            position: absolute;
+            right: 10px;
+        }
+
+        h4 {
+            display: inline-block;
+            color: var(--primary-color);
+        }
+
+        button {
+            color: var(--primary-color);
+            border:0;
+            background-color: transparent;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        polaris-workflow {
+            display: block;
+            box-sizing: border-box;
+            margin: auto;
+            padding: 10px;
+            
+            max-width: 600px;
+        }
+    </style>
+    <polaris-loader></polaris-loader>
+
+    <div id="theme">
+        <h4>Theme</h4>
+        <button id="dark-button">Dark</button>
+        <button id="light-button">Light</button>
+    </div>
+
+    <polaris-workflow url="data/settings.json" process="default"></polaris-workflow>
+
+    <script>
+        const style = document.querySelector("style");
+        const darkThemeButton = document.querySelector("#dark-button");
+        const lightThemeButton = document.querySelector("#light-button");
+        
+        lightThemeButton.addEventListener('click', () => { 
+            style.innerText = ''; 
+            localStorage.setItem('orion-theme', 'light');
+        });
+
+        darkThemeButton.addEventListener('click', () => {
+            localStorage.setItem('orion-theme', 'dark');
+            changeToDarkTheme();
+        });
+
+        const theme = localStorage.getItem('apex-theme');
+
+        if(theme === 'dark')
+            changeToDarkTheme();
+
+        function changeToDarkTheme() {
+            style.innerText = `
+                body {
+                    background-color: #222;
+                }
+
+                :root {
+                        --text-color: #DDD;
+                        --input-background: #444;
+
+                        --border-medium-style: 1px solid;
+                        --border-medium-color: #999;
+
+                        --border-heavy-style: 2px solid;
+
+                        --border-radius-button: 5px;
+                        --border-radius-input: 10px;
+
+                        --primary-color: hotpink;
+                        --primary-font-color: #111;
+
+                        --primary-light-color: pink;
+                        --primary-light-font-color: #444;
+
+                        --error-color: red;
+                        --error-light-color: lightpink;
+
+                        --shadow-light: 3px 2px 2px rgba(0, 0, 0, 1);
+                        --shadow-medium: 3px 4px 5px rgba(255, 105, 180, 0.6);
+                };`;
+        }
+    </script>
+</body>
+</html>
