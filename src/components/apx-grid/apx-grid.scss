@@ -1,12 +1,64 @@
+* {
+    box-sizing: border-box;
+}
+
+:host {
+    display: block;
+    max-height: 10rem;
+    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    overflow-y: auto;
+}
+
+div {
+
+}
+
 table {
     position: relative;
     border-collapse: collapse;
+
+    color:var(--text-color, black);
+    background-color:var(--input-background, white);
+
     width:100%;
 }
 
 table, th, td {
-    border: 1px solid black;
-    text-align:center;
+    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    text-align: center;
+}
+
+th {
+    position: sticky;
+    border-color: var(--primary-font-color, white);
+   
+    color: var(--primary-font-color, white);
+    background-color: var(--primary-color, green);
+    top: 0;
+}
+
+td:first-of-type, 
+th:first-of-type {
+    border-left: none;
+}
+
+table, 
+tr,
+th:last-of-type,
+td:last-of-type  {
+    border-right: none;
+}
+
+th:last-of-type {
+    border-right-color: var(--border-medium-color, #757575);
+}
+
+th span {
+    position: absolute;
+    display: inline-block;
 }
   
-tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(even) {
+    color: var(--text-alt-color, black);
+    background-color: var(--input-alt-background, #C0C0C0);
+}

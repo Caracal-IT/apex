@@ -8,13 +8,22 @@
                 {"tag" : "apx-header", "caption": "Apex Controls" },
                 {"tag": "apx-input", "id": "demo.textbox", "caption": "Text Box"},
                 {"tag": "apx-input", "id": "demo.password", "type": "password", "caption": "Password" },
-                {"tag": "div", 
+                {
+                    "tag": "div", 
                     "controls": [
                         {"tag": "apx-button", "caption": "Login", "next": "details"}
                     ] 
                 },
                 {"tag": "hr" },
-                {"tag": "apx-grid" }
+                {
+                    "tag": "apx-grid", 
+                    "items": "[DATA]/users",
+                    "columns": [
+                        {"caption": "Id", "name": "id"}, 
+                        {"caption": "Name", "name": "name"}, 
+                        {"caption": "Surname", "name": "surname"}
+                    ]
+                }
             ]        
         },
         {

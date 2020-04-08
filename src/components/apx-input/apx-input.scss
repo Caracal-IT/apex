@@ -20,7 +20,7 @@ input {
     &:focus {
         outline: none;
         margin: 4px 0;
-        border: var(--border-heavy-style, 2px solid) var(--primary-color, purple);
+        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
     }
 
     &[error="true"]{
@@ -34,5 +34,5 @@ input {
 label {
     font: inherit;
     font-size: 1rem;
-    color: var(--primary-color, purple);
+    color: var(--primary-color, green);
 }
