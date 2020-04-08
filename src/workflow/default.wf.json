@@ -20,7 +20,7 @@
                     "items": "[DATA]/users",
                     "columns": [
                         {"caption": "Id", "name": "id"}, 
-                        {"caption": "Name", "name": "name"}, 
+                        {"caption": "Name", "name": "firstName"}, 
                         {"caption": "Surname", "name": "surname"}
                     ]
                 }
