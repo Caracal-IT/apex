@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <template>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            display: block;
+            width: 200px;
+        }
+
+        input.es-input {
+            padding-right: 20px!important;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAYAAADJEc7MAAAACXBIW…nuVHRFhDQxMDAwMPz//x+OOzo6/iPz8WFGuocqAAAA//8DAD/sORHYg7kaAAAAAElFTkSuQmCC) right center no-repeat;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        button, input, optgroup, select, textarea {
+            margin: 0;
+            font: inherit;
+            color: inherit;
+        }
+
+        input {
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            color: -internal-light-dark-color(black, white);
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            -webkit-appearance: textfield;
+            background-color: -internal-light-dark-color(white, black);
+            -webkit-rtl-ordering: logical;
+            cursor: text;
+            margin: 0em;
+            font: 400 11px system-ui;
+            padding: 1px;
+            border-width: 2px;
+            border-style: inset;
+            border-color: initial;
+            border-image: initial;
+        }
+
+        :after, :before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+    
+
+.es-list {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #d1d1d1;
+    display: none;
+    z-index: 1000;
+    background: #fff;
+    max-height: 160px;
+    overflow-y: auto;
+    -moz-box-shadow: 0 2px 3px #ccc;
+    -webkit-box-shadow: 0 2px 3px #ccc;
+    box-shadow: 0 2px 3px #ccc;
+}
+
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+
+
+        label {
+            font: inherit;
+            font-size: 1rem;
+            color: var(--primary-color, green);
+        }
+    </template>
+    <style>
+.form-group {
+    width: 600px;
+}
+
+input {
+    display: block;
+
+    margin: 5px 1px;
+    padding: .6rem .4rem .6rem .4rem;
+    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    border-radius: var(--border-radius-input, 10px);;
+
+    font: inherit;
+    font-size: 1.2rem;
+    color: var(--text-color, black);
+    background-color: var(--input-background, white);
+
+    width: 100%;
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+
+    &:focus {
+        outline: none;
+        margin: 4px 0;
+        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+    }
+
+    &[error="true"]{
+        margin: 4px 0;
+        border: 2px solid var(--color-color, red);
+
+        background-color: var(--error-color, lightpink);
+    }
+}
+
+input:focus {
+        outline: none;
+        margin: 4px 0;
+        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+        border-bottom: none;
+    }
+        
+p{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+p::before {
+    position: absolute;
+    display: inline-block;
+    cursor: pointer;
+  content: "\25BC";
+  font-size: .8rem;
+  right: -15px;
+  color: hotpink;
+  top:6px;
+  background-color: #f2f2f2;
+  width: 40px;
+  text-align: center;
+
+  border-top-right-radius: 10px;
+  padding: 16px 0 10px;
+
+  border-left: 1px dotted #757575;
+}
+
+label {
+    font: inherit;
+    font-size: 1rem;
+    color: var(--primary-color, green);
+}
+
+ul {
+    position: relative;
+    list-style: none;
+    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    width: calc(100% + 13px);
+    padding: 0;
+    left: 1px;
+    top: -37px;
+}
+
+li {
+    padding: 5px;
+    cursor: pointer;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px
+}
+
+li:hover {
+    background-color: #f2f2f2;
+}
+
+    </style>
+</head>
+<body>
+    <div class="form-group">
+        <label>Select Country</label>
+        <p>
+        <input type="text" autocomplete="off" name="country" id="country" class="form-control es-input">
+        </p>
+        <ul class="es-list" style="display: block;">
+            <li value="Afghanistan" class="es-visible" style="display: block;">Afghanistan</li>
+            <li value="Albania" class="es-visible selected" style="display: block;">Albania</li>
+            <li value="Algeria" class="" style="display: none;">Algeria</li>
+            <li value="American Samoa" class="" style="display: none;">American Samoa</li>
+            <li value="Andorra" class="" style="display: none;">Andorra</li>
+            <li value="Angola" class="" style="display: none;">Angola</li>
+            <li value="Anguilla" class="" style="display: none;">Anguilla</li>
+            <li value="Antarctica" class="" style="display: none;">Antarctica</li>
+            <li value="Antigua and Barbuda" class="" style="display: none;">Antigua and Barbuda</li>
+            <li value="Argentina" class="" style="display: none;">Argentina</li>
+            <li value="Armenia" class="" style="display: none;">Armenia</li>
+            <li value="Aruba" class="" style="display: none;">Aruba</li>
+            <li value="Australia" class="" style="display: none;">Australia</li>
+            <li value="Austria" class="" style="display: none;">Austria</li>
+            <li value="Azerbaijan" class="" style="display: none;">Azerbaijan</li>
+            <li value="Bahamas" class="" style="display: none;">Bahamas</li>
+            <li value="Bahrain" class="" style="display: none;">Bahrain</li>
+            <li value="Bangladesh" class="" style="display: none;">Bangladesh</li>
+            <li value="Barbados" class="" style="display: none;">Barbados</li>
+            <li value="Belarus" class="" style="display: none;">Belarus</li>
+            <li value="Belgium" class="" style="display: none;">Belgium</li>
+            <li value="Belize" class="" style="display: none;">Belize</li>
+            <li value="Benin" class="" style="display: none;">Benin</li>
+            <li value="Bermuda" class="" style="display: none;">Bermuda</li>
+            <li value="Bhutan" class="" style="display: none;">Bhutan</li>
+            <li value="Bolivia" class="" style="display: none;">Bolivia</li>
+            <li value="Bosnia and Herzegovina" class="" style="display: none;">Bosnia and Herzegovina</li>
+            <li value="Botswana" class="" style="display: none;">Botswana</li>
+            <li value="Bouvet Island" class="" style="display: none;">Bouvet Island</li>
+            <li value="Brazil" class="" style="display: none;">Brazil</li>
+            <li value="British Indian Ocean Territory" class="" style="display: none;">British Indian Ocean Territory</li>
+            <li value="Brunei Darussalam" class="" style="display: none;">Brunei Darussalam</li>
+            <li value="Bulgaria" class="" style="display: none;">Bulgaria</li>
+            <li value="Burkina Faso" class="" style="display: none;">Burkina Faso</li>
+            <li value="Burundi" class="" style="display: none;">Burundi</li>
+            <li value="Cambodia" class="" style="display: none;">Cambodia</li>
+            <li value="Cameroon" class="" style="display: none;">Cameroon</li>
+            <li value="Canada" class="" style="display: none;">Canada</li>
+            <li value="Cape Verde" class="" style="display: none;">Cape Verde</li>
+            <li value="Cayman Islands" class="" style="display: none;">Cayman Islands</li>
+            <li value="Central African Republic" class="" style="display: none;">Central African Republic</li>
+            <li value="Chad" class="" style="display: none;">Chad</li>
+            <li value="Chile" class="" style="display: none;">Chile</li>
+            <li value="China" class="" style="display: none;">China</li>
+            <li value="Christmas Island" class="" style="display: none;">Christmas Island</li>
+            <li value="Cocos (Keeling) Islands" class="" style="display: none;">Cocos (Keeling) Islands</li>
+            <li value="Colombia" class="" style="display: none;">Colombia</li>
+            <li value="Comoros" class="" style="display: none;">Comoros</li>
+            <li value="Congo" class="" style="display: none;">Congo</li>
+            <li value="Cook Islands" class="" style="display: none;">Cook Islands</li>
+            <li value="Costa Rica" class="" style="display: none;">Costa Rica</li>
+            <li value="Croatia (Hrvatska)" class="" style="display: none;">Croatia (Hrvatska)</li>
+            <li value="Cuba" class="" style="display: none;">Cuba</li>
+            <li value="Cyprus" class="" style="display: none;">Cyprus</li>
+            <li value="Czech Republic" class="" style="display: none;">Czech Republic</li>
+            <li value="Denmark" class="" style="display: none;">Denmark</li>
+            <li value="Djibouti" class="" style="display: none;">Djibouti</li>
+            <li value="Dominica" class="" style="display: none;">Dominica</li>
+            <li value="Dominican Republic" class="" style="display: none;">Dominican Republic</li>
+            <li value="East Timor" class="" style="display: none;">East Timor</li>
+            <li value="Ecuador" class="" style="display: none;">Ecuador</li>
+            <li value="Egypt" class="" style="display: none;">Egypt</li>
+            <li value="El Salvador" class="" style="display: none;">El Salvador</li>
+            <li value="Equatorial Guinea" class="" style="display: none;">Equatorial Guinea</li>
+            <li value="Eritrea" class="" style="display: none;">Eritrea</li>
+            <li value="Estonia" class="" style="display: none;">Estonia</li>
+            <li value="Ethiopia" class="" style="display: none;">Ethiopia</li>
+            <li value="Falkland Islands (Malvinas)" class="" style="display: none;">Falkland Islands (Malvinas)</li>
+            <li value="Faroe Islands" class="" style="display: none;">Faroe Islands</li>
+            <li value="Fiji" class="" style="display: none;">Fiji</li>
+            <li value="Finland" class="" style="display: none;">Finland</li>
+            <li value="France" class="" style="display: none;">France</li>
+            <li value="France, Metropolitan" class="" style="display: none;">France, Metropolitan</li>
+            <li value="French Guiana" class="" style="display: none;">French Guiana</li>
+            <li value="French Polynesia" class="" style="display: none;">French Polynesia</li>
+            <li value="French Southern Territories" class="" style="display: none;">French Southern Territories</li>
+            <li value="Gabon" class="" style="display: none;">Gabon</li>
+            <li value="Gambia" class="" style="display: none;">Gambia</li>
+            <li value="Georgia" class="" style="display: none;">Georgia</li>
+            <li value="Germany" class="" style="display: none;">Germany</li>
+            <li value="Ghana" class="" style="display: none;">Ghana</li>
+            <li value="Gibraltar" class="" style="display: none;">Gibraltar</li>
+            <li value="Greece" class="" style="display: none;">Greece</li>
+            <li value="Greenland" class="" style="display: none;">Greenland</li>
+            <li value="Grenada" class="" style="display: none;">Grenada</li>
+            <li value="Guadeloupe" class="" style="display: none;">Guadeloupe</li>
+            <li value="Guam" class="" style="display: none;">Guam</li>
+            <li value="Guatemala" class="" style="display: none;">Guatemala</li>
+            <li value="Guernsey" class="" style="display: none;">Guernsey</li>
+            <li value="Guinea" class="" style="display: none;">Guinea</li>
+            <li value="Guinea-Bissau" class="" style="display: none;">Guinea-Bissau</li>
+            <li value="Guyana" class="" style="display: none;">Guyana</li>
+            <li value="Haiti" class="" style="display: none;">Haiti</li>
+            <li value="Heard and Mc Donald Islands" class="" style="display: none;">Heard and Mc Donald Islands</li>
+            <li value="Honduras" class="" style="display: none;">Honduras</li>
+            <li value="Hong Kong" class="" style="display: none;">Hong Kong</li>
+            <li value="Hungary" class="" style="display: none;">Hungary</li>
+            <li value="Iceland" class="" style="display: none;">Iceland</li>
+            <li value="India" class="" style="display: none;">India</li>
+            <li value="Indonesia" class="" style="display: none;">Indonesia</li>
+            <li value="Iran (Islamic Republic of)" class="" style="display: none;">Iran (Islamic Republic of)</li>
+            <li value="Iraq" class="" style="display: none;">Iraq</li>
+            <li value="Ireland" class="" style="display: none;">Ireland</li>
+            <li value="Isle of Man" class="" style="display: none;">Isle of Man</li>
+            <li value="Israel" class="" style="display: none;">Israel</li>
+            <li value="Italy" class="" style="display: none;">Italy</li>
+            <li value="Ivory Coast" class="" style="display: none;">Ivory Coast</li>
+            <li value="Jamaica" class="" style="display: none;">Jamaica</li>
+            <li value="Japan" class="" style="display: none;">Japan</li>
+            <li value="Jersey" class="" style="display: none;">Jersey</li>
+            <li value="Jordan" class="" style="display: none;">Jordan</li>
+            <li value="Kazakhstan" class="" style="display: none;">Kazakhstan</li>
+            <li value="Kenya" class="" style="display: none;">Kenya</li>
+            <li value="Kiribati" class="" style="display: none;">Kiribati</li>
+            <li value="Korea, Democratic People's Republic of" class="" style="display: none;">Korea, Democratic People's
+                Republic of</li>
+            <li value="Korea, Republic of" class="" style="display: none;">Korea, Republic of</li>
+            <li value="Kosovo" class="" style="display: none;">Kosovo</li>
+            <li value="Kuwait" class="" style="display: none;">Kuwait</li>
+            <li value="Kyrgyzstan" class="" style="display: none;">Kyrgyzstan</li>
+            <li value="Lao People's Democratic Republic" class="" style="display: none;">Lao People's Democratic Republic
+            </li>
+            <li value="Latvia" class="" style="display: none;">Latvia</li>
+            <li value="Lebanon" class="" style="display: none;">Lebanon</li>
+            <li value="Lesotho" class="" style="display: none;">Lesotho</li>
+            <li value="Liberia" class="" style="display: none;">Liberia</li>
+            <li value="Libyan Arab Jamahiriya" class="" style="display: none;">Libyan Arab Jamahiriya</li>
+            <li value="Liechtenstein" class="" style="display: none;">Liechtenstein</li>
+            <li value="Lithuania" class="" style="display: none;">Lithuania</li>
+            <li value="Luxembourg" class="" style="display: none;">Luxembourg</li>
+            <li value="Macau" class="" style="display: none;">Macau</li>
+            <li value="Macedonia" class="" style="display: none;">Macedonia</li>
+            <li value="Madagascar" class="" style="display: none;">Madagascar</li>
+            <li value="Malawi" class="" style="display: none;">Malawi</li>
+            <li value="Malaysia" class="" style="display: none;">Malaysia</li>
+            <li value="Maldives" class="" style="display: none;">Maldives</li>
+            <li value="Mali" class="" style="display: none;">Mali</li>
+            <li value="Malta" class="" style="display: none;">Malta</li>
+            <li value="Marshall Islands" class="" style="display: none;">Marshall Islands</li>
+            <li value="Martinique" class="" style="display: none;">Martinique</li>
+            <li value="Mauritania" class="" style="display: none;">Mauritania</li>
+            <li value="Mauritius" class="" style="display: none;">Mauritius</li>
+            <li value="Mayotte" class="" style="display: none;">Mayotte</li>
+            <li value="Mexico" class="" style="display: none;">Mexico</li>
+            <li value="Micronesia, Federated States of" class="" style="display: none;">Micronesia, Federated States of</li>
+            <li value="Moldova, Republic of" class="" style="display: none;">Moldova, Republic of</li>
+            <li value="Monaco" class="" style="display: none;">Monaco</li>
+            <li value="Mongolia" class="" style="display: none;">Mongolia</li>
+            <li value="Montenegro" class="" style="display: none;">Montenegro</li>
+            <li value="Montserrat" class="" style="display: none;">Montserrat</li>
+            <li value="Morocco" class="" style="display: none;">Morocco</li>
+            <li value="Mozambique" class="" style="display: none;">Mozambique</li>
+            <li value="Myanmar" class="" style="display: none;">Myanmar</li>
+            <li value="Namibia" class="" style="display: none;">Namibia</li>
+            <li value="Nauru" class="" style="display: none;">Nauru</li>
+            <li value="Nepal" class="" style="display: none;">Nepal</li>
+            <li value="Netherlands" class="" style="display: none;">Netherlands</li>
+            <li value="Netherlands Antilles" class="" style="display: none;">Netherlands Antilles</li>
+            <li value="New Caledonia" class="" style="display: none;">New Caledonia</li>
+            <li value="New Zealand" class="" style="display: none;">New Zealand</li>
+            <li value="Nicaragua" class="" style="display: none;">Nicaragua</li>
+            <li value="Niger" class="" style="display: none;">Niger</li>
+            <li value="Nigeria" class="" style="display: none;">Nigeria</li>
+            <li value="Niue" class="" style="display: none;">Niue</li>
+            <li value="Norfolk Island" class="" style="display: none;">Norfolk Island</li>
+            <li value="Northern Mariana Islands" class="" style="display: none;">Northern Mariana Islands</li>
+            <li value="Norway" class="" style="display: none;">Norway</li>
+            <li value="Oman" class="" style="display: none;">Oman</li>
+            <li value="Pakistan" class="" style="display: none;">Pakistan</li>
+            <li value="Palau" class="" style="display: none;">Palau</li>
+            <li value="Palestine" class="" style="display: none;">Palestine</li>
+            <li value="Panama" class="" style="display: none;">Panama</li>
+            <li value="Papua New Guinea" class="" style="display: none;">Papua New Guinea</li>
+            <li value="Paraguay" class="" style="display: none;">Paraguay</li>
+            <li value="Peru" class="" style="display: none;">Peru</li>
+            <li value="Philippines" class="" style="display: none;">Philippines</li>
+            <li value="Pitcairn" class="" style="display: none;">Pitcairn</li>
+            <li value="Poland" class="" style="display: none;">Poland</li>
+            <li value="Portugal" class="" style="display: none;">Portugal</li>
+            <li value="Puerto Rico" class="" style="display: none;">Puerto Rico</li>
+            <li value="Qatar" class="" style="display: none;">Qatar</li>
+            <li value="Reunion" class="" style="display: none;">Reunion</li>
+            <li value="Romania" class="" style="display: none;">Romania</li>
+            <li value="Russian Federation" class="" style="display: none;">Russian Federation</li>
+            <li value="Rwanda" class="" style="display: none;">Rwanda</li>
+            <li value="Saint Kitts and Nevis" class="" style="display: none;">Saint Kitts and Nevis</li>
+            <li value="Saint Lucia" class="" style="display: none;">Saint Lucia</li>
+            <li value="Saint Vincent and the Grenadines" class="" style="display: none;">Saint Vincent and the Grenadines
+            </li>
+            <li value="Samoa" class="" style="display: none;">Samoa</li>
+            <li value="San Marino" class="" style="display: none;">San Marino</li>
+            <li value="Sao Tome and Principe" class="" style="display: none;">Sao Tome and Principe</li>
+            <li value="Saudi Arabia" class="" style="display: none;">Saudi Arabia</li>
+            <li value="Senegal" class="" style="display: none;">Senegal</li>
+            <li value="Serbia" class="" style="display: none;">Serbia</li>
+            <li value="Seychelles" class="" style="display: none;">Seychelles</li>
+            <li value="Sierra Leone" class="" style="display: none;">Sierra Leone</li>
+            <li value="Singapore" class="" style="display: none;">Singapore</li>
+            <li value="Slovakia" class="" style="display: none;">Slovakia</li>
+            <li value="Slovenia" class="" style="display: none;">Slovenia</li>
+            <li value="Solomon Islands" class="" style="display: none;">Solomon Islands</li>
+            <li value="Somalia" class="" style="display: none;">Somalia</li>
+            <li value="South Africa" class="" style="display: none;">South Africa</li>
+            <li value="South Georgia South Sandwich Islands" class="" style="display: none;">South Georgia South Sandwich
+                Islands</li>
+            <li value="Spain" class="" style="display: none;">Spain</li>
+            <li value="Sri Lanka" class="" style="display: none;">Sri Lanka</li>
+            <li value="St. Helena" class="" style="display: none;">St. Helena</li>
+            <li value="St. Pierre and Miquelon" class="" style="display: none;">St. Pierre and Miquelon</li>
+            <li value="Sudan" class="" style="display: none;">Sudan</li>
+            <li value="Suriname" class="" style="display: none;">Suriname</li>
+            <li value="Svalbard and Jan Mayen Islands" class="es-visible" style="display: block;">Svalbard and Jan Mayen
+                Islands</li>
+            <li value="Swaziland" class="" style="display: none;">Swaziland</li>
+            <li value="Sweden" class="" style="display: none;">Sweden</li>
+            <li value="Switzerland" class="" style="display: none;">Switzerland</li>
+            <li value="Syrian Arab Republic" class="" style="display: none;">Syrian Arab Republic</li>
+            <li value="Taiwan" class="" style="display: none;">Taiwan</li>
+            <li value="Tajikistan" class="" style="display: none;">Tajikistan</li>
+            <li value="Tanzania, United Republic of" class="" style="display: none;">Tanzania, United Republic of</li>
+            <li value="Thailand" class="" style="display: none;">Thailand</li>
+            <li value="Togo" class="" style="display: none;">Togo</li>
+            <li value="Tokelau" class="" style="display: none;">Tokelau</li>
+            <li value="Tonga" class="" style="display: none;">Tonga</li>
+            <li value="Trinidad and Tobago" class="" style="display: none;">Trinidad and Tobago</li>
+            <li value="Tunisia" class="" style="display: none;">Tunisia</li>
+            <li value="Turkey" class="" style="display: none;">Turkey</li>
+            <li value="Turkmenistan" class="" style="display: none;">Turkmenistan</li>
+            <li value="Turks and Caicos Islands" class="" style="display: none;">Turks and Caicos Islands</li>
+            <li value="Tuvalu" class="" style="display: none;">Tuvalu</li>
+            <li value="Uganda" class="" style="display: none;">Uganda</li>
+            <li value="Ukraine" class="" style="display: none;">Ukraine</li>
+            <li value="United Arab Emirates" class="" style="display: none;">United Arab Emirates</li>
+            <li value="United Kingdom" class="" style="display: none;">United Kingdom</li>
+            <li value="United States" class="" style="display: none;">United States</li>
+            <li value="United States minor outlying islands" class="" style="display: none;">United States minor outlying
+                islands</li>
+            <li value="Uruguay" class="" style="display: none;">Uruguay</li>
+            <li value="Uzbekistan" class="" style="display: none;">Uzbekistan</li>
+            <li value="Vanuatu" class="" style="display: none;">Vanuatu</li>
+            <li value="Vatican City State" class="" style="display: none;">Vatican City State</li>
+            <li value="Venezuela" class="" style="display: none;">Venezuela</li>
+            <li value="Vietnam" class="" style="display: none;">Vietnam</li>
+            <li value="Virgin Islands (British)" class="" style="display: none;">Virgin Islands (British)</li>
+            <li value="Virgin Islands (U.S.)" class="" style="display: none;">Virgin Islands (U.S.)</li>
+            <li value="Wallis and Futuna Islands" class="" style="display: none;">Wallis and Futuna Islands</li>
+            <li value="Western Sahara" class="" style="display: none;">Western Sahara</li>
+            <li value="Yemen" class="" style="display: none;">Yemen</li>
+            <li value="Zaire" class="" style="display: none;">Zaire</li>
+            <li value="Zambia" class="" style="display: none;">Zambia</li>
+            <li value="Zimbabwe" class="" style="display: none;">Zimbabwe</li>
+        </ul>
+    </div>
+</body>
+</html>
