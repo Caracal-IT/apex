@@ -1,8 +1,9 @@
-import css from './apx-check.scss';
+import css from './apx-switch.scss';
 
-export class Checkbox extends HTMLElement {
+export class Switch extends HTMLElement {
     private _input: HTMLInputElement;
     private _label: HTMLLabelElement;
+    private _span: HTMLSpanElement;
     private _textLabel: HTMLLabelElement;
     
     id: string;
@@ -17,12 +18,17 @@ export class Checkbox extends HTMLElement {
         this.attachShadow({mode: 'open'});
         this.shadowRoot.innerHTML = `<style>${css}</style>`;
 
+        this._label = document.createElement('label');
+        this._label.className = 'switch';
+        this.shadowRoot.appendChild(this._label);
+
         this._input = document.createElement('input');
         this._input.type = "checkbox";        
-        this.shadowRoot.appendChild(this._input);
+        this._label.appendChild(this._input);
 
-        this._label = document.createElement('label');
-        this.shadowRoot.appendChild(this._label);
+        this._span = document.createElement('span');
+        this._span.className = 'slider round';
+        this._label.appendChild(this._span);
 
         this._textLabel = document.createElement('label');
         this.shadowRoot.appendChild(this._textLabel);
@@ -36,4 +42,4 @@ export class Checkbox extends HTMLElement {
     }
 }
 
-customElements.define('apx-check', Checkbox);
+customElements.define('apx-switch', Switch);
