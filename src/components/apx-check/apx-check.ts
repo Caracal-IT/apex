@@ -9,8 +9,8 @@ export class Checkbox extends HTMLElement {
     caption: string;
     htmlFor: string;
 
-    get value() { return this._input.value; }
-    set value(value) { this._input.value = value; }
+    get value() { return this._input.checked; }
+    set value(value) { this._input.checked = value; }
 
     constructor(){
         super();
@@ -19,7 +19,7 @@ export class Checkbox extends HTMLElement {
         this.shadowRoot.innerHTML = `<style>${css}</style>`;
 
         this._input = document.createElement('input');
-        this._input.type = "checkbox";
+        this._input.type = "checkbox";        
         this.shadowRoot.appendChild(this._input);
 
         this._label = document.createElement('label');

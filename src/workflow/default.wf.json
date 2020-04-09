@@ -8,7 +8,14 @@
                 {"tag" : "apx-header", "caption": "Apex Controls" },
                 {"tag": "apx-input", "id": "demo.textbox", "caption": "Text Box"},
                 {"tag": "apx-check", "id": "demo.checkbox", "caption": "Check"},
-                {"tag": "apx-radio", "id": "demo.radio", "caption": "Radio 1"},
+                {
+                    "tag": "apx-radio", 
+                    "id": "demo.radio",
+                    "items": [
+                        {"caption": "Radio 1", "value": "radio1"},
+                        {"caption": "Radio 2", "value": "radio2"}
+                    ]
+                },
                 {"tag": "apx-input", "id": "demo.password", "type": "password", "caption": "Password" },
                 {
                     "tag": "div", 

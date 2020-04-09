@@ -25,7 +25,7 @@ input:checked + label:after {
 	font-size: 32px;
 }
 
-label:last-of-type {
+.label {
     position: relative;
     display: inline-block;
     margin: 0 5px;
