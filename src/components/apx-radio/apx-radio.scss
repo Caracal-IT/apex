@@ -1,0 +1,35 @@
+input {
+	display: none;
+}
+
+input + label {
+	-webkit-appearance: none;
+	border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+	padding: 9px;
+	border-radius: 50px;
+	display: inline-block;
+	position: relative;
+}
+
+input:checked + label:after {
+	content: ' ';
+	width: 12px;
+	height: 12px;
+	border-radius: 50px;
+	position: absolute;
+	top: 3px;
+	background: var(--primary-color, green);
+	box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+	text-shadow: 0px;
+	left: 3px;
+	font-size: 32px;
+}
+
+label:last-of-type {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+    color: var(--text-color, black);
+    vertical-align: top;
+    top: 2px;
+}
