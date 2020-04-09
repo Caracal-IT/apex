@@ -10,7 +10,9 @@ export class Grid extends HTMLElement {
     caption: string;
     columns: Array<Column>;
     items: []|string;
-    ctx: Context;
+    height: string;
+
+    ctx: Context;    
 
     searchColumn = '';
     searchDirection = 'asc';
@@ -28,6 +30,9 @@ export class Grid extends HTMLElement {
     }
 
     async connectedCallback() {
+        if(this.height) 
+            this.style.maxHeight = this.height;        
+
         await this.initItems();
         this.render();
     }
@@ -57,7 +62,7 @@ export class Grid extends HTMLElement {
             sortIcon = this.searchDirection === 'asc' ? '<span>&uarr;</span>' : '<span>&darr;</span>';
         }
 
-        col.innerHTML = column.caption + " " + sortIcon;
+        col.innerHTML = `${column.caption} ${sortIcon}`;
 
         col.addEventListener('click', () => {
             if(this.searchColumn !== column.name)
@@ -75,7 +80,6 @@ export class Grid extends HTMLElement {
 
             this._items =  a;
             this.render();
-
         });
     }
 
@@ -89,6 +93,8 @@ export class Grid extends HTMLElement {
     private createBody() {
         const body = document.createElement('tbody');
         this._table.appendChild(body);
+
+        //console.dir(Object.keys(this._items[0]).map(s => s.replace(/([A-Z])/g, ' $1').trim()));
 
         this._items.forEach(i => this.createRow(i, body));
     }
