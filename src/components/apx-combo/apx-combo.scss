@@ -115,6 +115,7 @@ ul {
     overflow-y: auto;
     
     transition: max-height .4s ease-in-out;
+    z-index: 999;
 }
 
 .hide {
@@ -122,10 +123,9 @@ ul {
 }
 
 .no-items ul {
-    max-height: 0;
-    height: 0;
-    border: none;
-    z-index: -1;
+    max-height: 0!important;
+    height: 0!important;
+    border: none!important;
 }
 
 .no-items input {
@@ -138,7 +138,7 @@ ul {
     height: auto;
     border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
     border-top: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
-    z-index: 999;
+    transition: max-height .4s ease-in-out;
 }
 
 li {
