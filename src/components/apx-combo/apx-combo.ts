@@ -14,6 +14,7 @@ export class Combo extends HTMLElement {
     private _inputHandler: EventListener;
     private _iconClickHandler: EventListener;
     private _comboClickHandler: EventListener;
+    private _blurHandler: EventListener;
 
     caption: string;
     ctx:Context;
@@ -34,6 +35,7 @@ export class Combo extends HTMLElement {
         this._iconClickHandler = this.iconClickHandler.bind(this);
         this._inputFocusHandler = this.inputFocusHandler.bind(this);
         this._inputHandler = this.inputHandler.bind(this);
+        this._blurHandler = this.blurHandler.bind(this);
     }
 
     connectedCallback() {
@@ -48,12 +50,15 @@ export class Combo extends HTMLElement {
         this._icon.addEventListener('click', this._iconClickHandler);
         this._input.addEventListener('focus', this._inputFocusHandler);
         this._input.addEventListener('input', this._inputHandler);
+
+        this._combo.addEventListener('mouseleave', this._blurHandler);
     }
 
     disconnectedCallback() {
         this._itemContainer.removeEventListener('click', this._comboClickHandler);
         this._icon.removeEventListener('click', this._iconClickHandler);
         this._input.removeEventListener('focus', this._inputFocusHandler);
+        this._combo.removeEventListener('mouseleave', this._blurHandler);
     }
 
     private inputHandler() {
@@ -97,6 +102,11 @@ export class Combo extends HTMLElement {
 
     private inputFocusHandler() {
         this._isOpen = true;
+    }
+
+    private blurHandler() {
+        this._isOpen = false;
+        this._container.focus();
     }
 
     private createCombo() {
