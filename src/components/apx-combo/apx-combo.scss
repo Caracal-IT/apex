@@ -97,7 +97,6 @@ label {
 
 ul {
     position: absolute;
-  //  display: none;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -118,8 +117,8 @@ ul {
     z-index: 999;
 }
 
-.hide {
-    display: none;
+li.hide  {
+   display: none;
 }
 
 .no-items ul {
