@@ -30,6 +30,7 @@ export class DateControl extends HTMLElement {
         const month = 3;
         const year = 2020;
         const date = new Date(year, month, day);
+        const today = new Date(Date.now());
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const daysInPrevMonth = new Date(year, month, 0).getDate();
         const dayOfWeek = date.getDay();
@@ -40,16 +41,39 @@ export class DateControl extends HTMLElement {
         
 
         days += '<tr>';
-        for(let i = dayOfWeek; i > 0; i--)
-           days += `<td style="color:#ccc">${daysInPrevMonth - i}</td>`;
+        for(let i = dayOfWeek; i > 0; i--) {
+           if(
+               today.getFullYear() === date.getFullYear() &&
+               today.getMonth() === date.getMonth() - 1 &&
+               today.getDate() == i
+           ) {
+                days += `<td style="color:hotpink">${daysInPrevMonth - i}</td>`;
+           }
+           else {
+                days += `<td style="color:#ccc">${daysInPrevMonth - i}</td>`;
+           }
+        }
 
-        for(let i = dayOfWeek + 1; i <= 7; i++)
-           days += `<td>${i - dayOfWeek}</td>`;
+        for(let i = dayOfWeek + 1; i <= 7; i++) {
+            if(
+                today.getFullYear() === date.getFullYear() &&
+                today.getMonth() === date.getMonth() &&
+                today.getDate() == i
+            ) {
+                 days += `<td style="text-align:center;color:hotpink">${i - dayOfWeek}</td>`;
+            }
+            else {
+                days += `<td style="text-align:center;">${i - dayOfWeek}</td>`;
+            }
+
+           
+        }
 
         days += '</td>';
 
         let dayCounter = 7 - dayOfWeek;
         let color = "#000"
+        let cuuMonth = date.getMonth();
         for(let row = 1; row < 6; row++) {
             days += '<tr>';
 
@@ -58,10 +82,23 @@ export class DateControl extends HTMLElement {
 
                 if(dayCounter > daysInMonth) {
                     dayCounter = 1;
+                    cuuMonth++;
                     color = "#ccc"
                 }
 
-                days += `<td style="color:${color}">${dayCounter}</td>`;
+                if(
+                    today.getFullYear() === date.getFullYear() &&
+                    today.getMonth() === cuuMonth &&
+                    today.getDate() == dayCounter
+                ) {
+                    days += `<td style="color:${color};text-align:center;background-color:hotpink;border-radius:100%">${dayCounter}</td>`;
+                }
+                else {
+                    days += `<td style="color:${color};text-align:center;">${dayCounter}</td>`;
+                }
+
+
+                
             }
 
             days += '</tr>';
