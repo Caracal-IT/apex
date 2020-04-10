@@ -61,23 +61,10 @@ export class Combo extends HTMLElement {
         });
 
         this._itemContainer = document.createElement('ul');
-        this._itemContainer.innerHTML = `
-            <li data-value='A'>A</li>
-            <li data-value='B'>B</li>
-            <li data-value='C'>C</li>
-            <li data-value='D'>D</li>
-            <li data-value='E'>E</li>
-            <li data-value='F'>F</li>
-            <li data-value='G'>G</li>
-            <li data-value='H'>H</li>
-            <li data-value='I'>I</li>
-            <li data-value='J'>J</li>
-            <li data-value='K'>K</li>
-        `;
         this._combo.appendChild(this._itemContainer);
 
         this._itemContainer.addEventListener('click', (e: any) => {
-            this.value = e.target.dataset.value;
+            this.value = e.target.textContent;//e.target.dataset.value;
             this.dispatchEvent(new Event('input'));
             this._container.focus();
             isOpen = false;
@@ -87,6 +74,18 @@ export class Combo extends HTMLElement {
     connectedCallback() {
         this._label.textContent = this.caption;
         this._input.id = this.id;
+
+        this._itemContainer.innerHTML = '';
+
+        this.items.forEach(this.createItem.bind(this));
+    }
+
+    createItem(item: any) {
+        const li = document.createElement('li');
+        li.dataset.value = item.value;
+        li.textContent = this.ctx.model.getInterpolatedValue(item.caption);
+
+        this._itemContainer.appendChild(li);
     }
 }
 

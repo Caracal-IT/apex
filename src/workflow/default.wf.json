@@ -23,7 +23,11 @@
                     "caption": "Combo",
                     "items": [
                         {"caption": "Combo 1", "value": "combo1"},
-                        {"caption": "Combo 2", "value": "combo2"}
+                        {"caption": "Combo 2", "value": "combo2"},
+                        {"caption": "Combo 3", "value": "combo3"},
+                        {"caption": "Combo 4", "value": "combo4"},
+                        {"caption": "Combo 5", "value": "combo5"},
+                        {"caption": "Combo 6", "value": "combo6"}
                     ]
                 },
                 {"tag": "apx-input", "id": "demo.password", "type": "password", "caption": "Password" },
