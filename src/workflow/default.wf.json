@@ -19,7 +19,7 @@
                 },
                 {
                     "tag": "apx-combo", 
-                    "id": "demo.combo",
+                    "id": "demo.comboBox",
                     "caption": "Combo",
                     "items": [
                         {"caption": "Combo 1", "value": "combo1"},

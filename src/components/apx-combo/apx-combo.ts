@@ -1,4 +1,5 @@
 import css from './apx-combo.scss';
+import { Context } from 'caracal_polaris/dist/types/model/context.model';
 
 export class Combo extends HTMLElement {
     private _container: HTMLDivElement;
@@ -8,10 +9,11 @@ export class Combo extends HTMLElement {
     private _itemContainer: HTMLUListElement;
 
     caption: string;
+    ctx:Context;
     items: [];
 
-    get value() { return this._input.value; }
-    set value(value) { this._input.value = value; }
+   get value() { console.log('getValue'); return this._input.value; }
+   set value(value) { this._input.value = value; }
 
     constructor(){
         super();
@@ -33,7 +35,6 @@ export class Combo extends HTMLElement {
         this._combo.className = 'combo';
         this._combo.tabIndex = 0;
         
-
         this._container.appendChild(this._combo);
 
         this._input = document.createElement('input');
@@ -76,7 +77,8 @@ export class Combo extends HTMLElement {
         this._combo.appendChild(this._itemContainer);
 
         this._itemContainer.addEventListener('click', (e: any) => {
-            this._input.value = e.target.dataset.value;
+            this.value = e.target.dataset.value;
+            this.dispatchEvent(new Event('input'));
             this._container.focus();
             isOpen = false;
         });
@@ -84,6 +86,7 @@ export class Combo extends HTMLElement {
 
     connectedCallback() {
         this._label.textContent = this.caption;
+        this._input.id = this.id;
     }
 }
 
