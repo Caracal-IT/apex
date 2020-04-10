@@ -54,7 +54,7 @@
             "type": "page-activity",            
             "controls": [
                 {"tag" : "apx-header", "caption": "Details" },
-                {"tag": "apx-label", "caption": "Text Box Value - {{demo.textbox}}"},
+                {"tag": "apx-label", "caption": "Text Box Value - {{demo.textbox}} - {{demo.comboBox}}"},
                 {"tag": "apx-input", "id": "demo.textbox", "caption": "Text Box"},
                 {"tag": "div", 
                  "controls": [

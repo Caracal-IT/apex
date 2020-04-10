@@ -9,6 +9,7 @@ export class Combo extends HTMLElement {
     private _icon: HTMLDivElement;
     private _itemContainer: HTMLUListElement;
     private _isOpen = false;
+    private _value = '';
 
     private _inputFocusHandler: EventListener;
     private _inputHandler: EventListener;
@@ -20,8 +21,26 @@ export class Combo extends HTMLElement {
     ctx:Context;
     items: [];
 
-   get value() { return this._input.value; }
-   set value(value) { this._input.value = value; }
+   get value() { return this._value; }
+   set value(value) { this._value = value; }
+
+   getCaption() {
+    let val: any = this.items?.find((i: any) => i.value === this._value);
+
+    if(val && val.caption)
+        return val.caption
+    else
+        return this._value; 
+   }
+
+   getValue() {
+    let val: any = this.items?.find((i: any) => i.value === this._input.value);
+
+    if(val && val.value)
+        return val.value
+    else
+        return this._input.value; 
+   }
 
     constructor(){
         super();
@@ -41,7 +60,8 @@ export class Combo extends HTMLElement {
     connectedCallback() {
         this._label.textContent = this.caption;
         this._input.id = this.id;
-
+        this._input.value = this.getCaption();
+        
         this._itemContainer.innerHTML = '';
         this.items.forEach(this.createItem.bind(this));
         this.inputHandler();
@@ -62,9 +82,9 @@ export class Combo extends HTMLElement {
     }
 
     private inputHandler() {
-        const text = this.value.trim().toLowerCase();
+        this._value = this.getValue();
         const items = Array.from(this._itemContainer.childNodes);
-        items.forEach(this.displayHideItem.bind(this, text));
+        items.forEach(this.displayHideItem.bind(this, this._value.trim().toLowerCase()));
 
         const count = items.filter((i: any) => i.classList.contains('hide'))
                            .length;
@@ -83,7 +103,8 @@ export class Combo extends HTMLElement {
     }
 
     private comboClickHandler(event: any) {
-        this.value = event.target.textContent;//e.target.dataset.value;
+        this._value = event.target.dataset.value;
+        this._input.value = this.getCaption();
         this.dispatchEvent(new Event('input'));
         this._container.focus();
         this._isOpen = false;
