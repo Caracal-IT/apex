@@ -117,6 +117,18 @@ ul {
     z-index: 999;
 }
 
+.hide {
+    display: none;
+}
+
+.no-items ul {
+    display: none!important;
+}
+
+.no-items input {
+    border-bottom-left-radius: var(--border-radius-input, 10px);
+}
+
 .combo:focus  ul,
 .combo:focus-within ul {
     display: block;

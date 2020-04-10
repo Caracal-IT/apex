@@ -42,6 +42,7 @@ export class Combo extends HTMLElement {
 
         this._itemContainer.innerHTML = '';
         this.items.forEach(this.createItem.bind(this));
+        this.inputHandler();
 
         this._itemContainer.addEventListener('click', this._comboClickHandler);
         this._icon.addEventListener('click', this._iconClickHandler);
@@ -56,7 +57,24 @@ export class Combo extends HTMLElement {
     }
 
     private inputHandler() {
+        const text = this.value.trim().toLowerCase();
+        const items = Array.from(this._itemContainer.childNodes);
+        items.forEach(this.displayHideItem.bind(this, text));
 
+        const count = items.filter((i: any) => i.classList.contains('hide'))
+                           .length;
+        
+        if(count === items.length)
+            this._combo.classList.add('no-items');
+        else
+            this._combo.classList.remove('no-items');
+    }
+
+    private displayHideItem(text: string, item: HTMLUListElement) {
+        if(item.textContent.toLowerCase().indexOf(text) > -1)
+            item.classList.remove("hide");
+        else
+            item.classList.add("hide");
     }
 
     private comboClickHandler(event: any) {
