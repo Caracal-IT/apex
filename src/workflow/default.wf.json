@@ -17,6 +17,7 @@
                         {"caption": "Radio 2", "value": "radio2"}
                     ]
                 },
+                {"tag": "apx-date", "id": "demo.date", "caption": "Date Box"},
                 {
                     "tag": "apx-combo", 
                     "id": "demo.comboBox",
