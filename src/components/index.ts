@@ -1,5 +1,6 @@
 import './apx-button/apx-button';
 import './apx-check/apx-check';
+import './apx-combo/apx-combo';
 import './apx-grid/apx-grid';
 import './apx-header/apx-header'
 import './apx-input/apx-input';

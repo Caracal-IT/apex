@@ -17,6 +17,15 @@
                         {"caption": "Radio 2", "value": "radio2"}
                     ]
                 },
+                {
+                    "tag": "apx-combo", 
+                    "id": "demo.combo",
+                    "caption": "Combo",
+                    "items": [
+                        {"caption": "Combo 1", "value": "combo1"},
+                        {"caption": "Combo 2", "value": "combo2"}
+                    ]
+                },
                 {"tag": "apx-input", "id": "demo.password", "type": "password", "caption": "Password" },
                 {
                     "tag": "div", 
