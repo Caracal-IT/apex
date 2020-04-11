@@ -8,10 +8,13 @@ export class DateControl extends HTMLElement {
     private _label: HTMLSpanElement;
     private _calendar: HTMLSpanElement;
     private _popup: HTMLDivElement;
-    private _date = new Date(2020, 3, 6);
+    private _date = new Date();
+    private _value: string;
 
     caption: string;
-    htmlFor: string;
+    
+    get value() { return this._value; }
+    set value(value) { this._value = value; }
 
     constructor(){
         super();
@@ -54,6 +57,10 @@ export class DateControl extends HTMLElement {
             if(event.target.dataset.action === 'left-arrow') return;
             if(event.target.dataset.action === 'right-arrow') return;
 
+            this._popup.classList.toggle("hidden");
+        });
+
+        this._calendar.addEventListener('click', (event: any) => {
             this._popup.classList.toggle("hidden");
         });
 
