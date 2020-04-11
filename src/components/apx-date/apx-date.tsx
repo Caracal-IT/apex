@@ -41,7 +41,7 @@ export class DateControl extends HTMLElement {
 
     connectedCallback() {
         this._caption.textContent = this.caption;
-        this._label.textContent = '[Date]';
+        this._label.textContent = '';
         this._calendar.innerHTML = '<div>&#x25BC;</div>';
 
         this._calendar.addEventListener('click', () => {
