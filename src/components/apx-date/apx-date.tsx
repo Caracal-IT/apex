@@ -3,7 +3,10 @@ import css from './apx-date.scss';
 import {DateBuilder} from './date-builder';
 
 export class DateControl extends HTMLElement {
+    private _caption: HTMLSpanElement;
+    private _dateContainer: HTMLDivElement;
     private _label: HTMLSpanElement;
+    private _calendar: HTMLSpanElement;
     private _popup: HTMLDivElement;
     private _date = new Date(2020, 3, 6);
 
@@ -16,20 +19,52 @@ export class DateControl extends HTMLElement {
         this.attachShadow({mode: 'open'});
         this.shadowRoot.innerHTML = `<style>${css}</style>`;
 
+        this._caption = document.createElement('span');
+        this._caption.className = 'caption';
+        this.shadowRoot.appendChild(this._caption);
+
+        this._dateContainer = document.createElement('div');
+        this._dateContainer.className = "dateContainer";
+        this._dateContainer.tabIndex = 0;
+        this.shadowRoot.appendChild(this._dateContainer);
+
         this._label = document.createElement('span');
-        this.shadowRoot.appendChild(this._label);
+        this._label.className = "dateLabel";
+        this._dateContainer.appendChild(this._label);
+
+        this._calendar = document.createElement('span');
+        this._calendar.className = "calendar";
+        this._dateContainer.appendChild(this._calendar);
 
         this.createPopup();
     }
 
     connectedCallback() {
-        this._label.textContent = this.caption;
+        this._caption.textContent = this.caption;
+        this._label.textContent = '[Date]';
+        this._calendar.innerHTML = '<div>&#x25BC;</div>';
+
+        this._calendar.addEventListener('click', () => {
+            this._popup.classList.toggle("hidden");
+        });
+
+        this._label.addEventListener('click', () => {
+            this._popup.classList.toggle("hidden");
+        });
+
+        this._dateContainer.addEventListener('mouseleave', () => {
+            this._popup.classList.add("hidden");
+        });
+
+        this._dateContainer.addEventListener('blur', () => {
+            this._popup.classList.add("hidden");
+        });
     }
 
     private createPopup() {
         this._popup = document.createElement('div');
-        this._popup.className = 'popup';
-        this.shadowRoot.appendChild(this._popup);
+        this._popup.className = 'popup hidden';
+        this._dateContainer.appendChild(this._popup);
 
         this._popup.addEventListener('click', (event: any) => {
             if(event.target.dataset.action === 'month') return;
@@ -61,6 +96,8 @@ export class DateControl extends HTMLElement {
 
 
             this._date = new Date(event.target.dataset.date);
+            this._label.textContent = this._date.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
+            this._popup.classList.toggle("hidden");
         });
 
         const builder = new DateBuilder(this._date, this._date, this._popup);
