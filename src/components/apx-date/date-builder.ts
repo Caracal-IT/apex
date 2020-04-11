@@ -45,7 +45,7 @@ export class DateBuilder {
         td.textContent = text;
         td.className = css;
         td.dataset.action = css;
-        td.dataset.date = `${this.date.getFullYear()}-${this.date.getMonth() + 1}-${this.date.getDate()}`;
+        td.dataset.date = `${this.date.getFullYear()}/${this.date.getMonth() + 1}/${this.date.getDate()}`;
         header.appendChild(td);
     }
 
@@ -99,7 +99,7 @@ export class DateBuilder {
             td.classList.add('selected');
 
         td.textContent = `${currDate.getDate()}`;
-        td.dataset.date = `${currDate.getFullYear()}-${currDate.getMonth() + 1}-${currDate.getDate()}`;
+        td.dataset.date = `${currDate.getFullYear()}/${currDate.getMonth() + 1}/${currDate.getDate()}`;
     }
 
      private isDatesEqual(date1: Date, date2: Date) {

@@ -36,6 +36,7 @@ export class DateControl extends HTMLElement {
             if(event.target.dataset.action === 'year') return;
 
             if(event.target.dataset.action === 'left-arrow' || event.target.dataset.action === 'right-arrow'){
+                console.log(event.target.dataset.date);
                 const date = new Date(event.target.dataset.date);
                 let newDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
 
