@@ -25,7 +25,7 @@ export class DateControl extends HTMLElement {
 
         this._dateContainer = document.createElement('div');
         this._dateContainer.className = "dateContainer";
-        this._dateContainer.tabIndex = 0;
+        this._dateContainer.tabIndex = 10;
         this.shadowRoot.appendChild(this._dateContainer);
 
         this._label = document.createElement('span');
@@ -48,7 +48,12 @@ export class DateControl extends HTMLElement {
             this._popup.classList.toggle("hidden");
         });
 
-        this._label.addEventListener('click', () => {
+        this._dateContainer.addEventListener('click', (event: any) => {
+            if(event.target.dataset.action === 'month') return;
+            if(event.target.dataset.action === 'year') return;
+            if(event.target.dataset.action === 'left-arrow') return;
+            if(event.target.dataset.action === 'right-arrow') return;
+
             this._popup.classList.toggle("hidden");
         });
 
@@ -97,7 +102,7 @@ export class DateControl extends HTMLElement {
 
             this._date = new Date(event.target.dataset.date);
             this._label.textContent = this._date.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
-            this._popup.classList.toggle("hidden");
+            this._popup.classList.remove("hidden");
         });
 
         const builder = new DateBuilder(this._date, this._date, this._popup);

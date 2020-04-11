@@ -126,6 +126,9 @@ export class Combo extends HTMLElement {
     }
 
     private blurHandler() {
+        if(!this._isOpen)
+            return;
+            
         this._isOpen = false;
         this._container.focus();
     }
