@@ -60,7 +60,7 @@ export class DateControl extends HTMLElement {
             this._popup.classList.toggle("hidden");
         });
 
-        this._calendar.addEventListener('click', (event: any) => {
+        this._calendar.addEventListener('click', () => {
             this._popup.classList.toggle("hidden");
         });
 
