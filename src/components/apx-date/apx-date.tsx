@@ -1,8 +1,11 @@
 import css from './apx-date.scss';
 
+import {DateBuilder} from './date-builder';
+
 export class DateControl extends HTMLElement {
     private _label: HTMLSpanElement;
     private _popup: HTMLDivElement;
+    private _date = new Date(2020, 3, 6);
 
     caption: string;
     htmlFor: string;
@@ -25,118 +28,43 @@ export class DateControl extends HTMLElement {
 
     private createPopup() {
         this._popup = document.createElement('div');
+        this._popup.className = 'popup';
         this.shadowRoot.appendChild(this._popup);
-        const day = 1;
-        const month = 3;
-        const year = 2020;
-        const date = new Date(year, month, day);
-        const today = new Date(Date.now());
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const daysInPrevMonth = new Date(year, month, 0).getDate();
-        const dayOfWeek = date.getDay();
-        const startDaysInPrevMonth = new Date(year, month, 0).getDate() - dayOfWeek + 1;
-        const totalDays = 72;
 
-        let days = '';
-        
+        this._popup.addEventListener('click', (event: any) => {
+            if(event.target.dataset.action === 'month') return;
+            if(event.target.dataset.action === 'year') return;
 
-        days += '<tr>';
-        for(let i = dayOfWeek; i > 0; i--) {
-           if(
-               today.getFullYear() === date.getFullYear() &&
-               today.getMonth() === date.getMonth() - 1 &&
-               today.getDate() == i
-           ) {
-                days += `<td style="color:hotpink">${daysInPrevMonth - i}</td>`;
-           }
-           else {
-                days += `<td style="color:#ccc">${daysInPrevMonth - i}</td>`;
-           }
-        }
+            if(event.target.dataset.action === 'left-arrow' || event.target.dataset.action === 'right-arrow'){
+                const date = new Date(event.target.dataset.date);
+                let newDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
 
-        for(let i = dayOfWeek + 1; i <= 7; i++) {
-            if(
-                today.getFullYear() === date.getFullYear() &&
-                today.getMonth() === date.getMonth() &&
-                today.getDate() == i
-            ) {
-                 days += `<td style="text-align:center;color:hotpink">${i - dayOfWeek}</td>`;
-            }
-            else {
-                days += `<td style="text-align:center;">${i - dayOfWeek}</td>`;
+                if(event.target.dataset.action === 'right-arrow')
+                    newDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
+
+                this._popup.innerHTML = '';
+                const builder = new DateBuilder(this._date, newDate, this._popup);
+                builder.build();
+
+                return;
             }
 
-           
-        }
+            if(!event.target.dataset.date)
+                return;
 
-        days += '</td>';
+            const selected = this._popup.querySelector('.selected');
 
-        let dayCounter = 7 - dayOfWeek;
-        let color = "#000"
-        let cuuMonth = date.getMonth();
-        for(let row = 1; row < 6; row++) {
-            days += '<tr>';
+            if(selected)
+                selected.classList.remove('selected');
 
-            for(let i = 0; i < 7; i++) {
-                dayCounter++;
-
-                if(dayCounter > daysInMonth) {
-                    dayCounter = 1;
-                    cuuMonth++;
-                    color = "#ccc"
-                }
-
-                if(
-                    today.getFullYear() === date.getFullYear() &&
-                    today.getMonth() === cuuMonth &&
-                    today.getDate() == dayCounter
-                ) {
-                    days += `<td style="color:${color};text-align:center;background-color:hotpink;border-radius:100%">${dayCounter}</td>`;
-                }
-                else {
-                    days += `<td style="color:${color};text-align:center;">${dayCounter}</td>`;
-                }
+            event.target.classList.add('selected');
 
 
-                
-            }
+            this._date = new Date(event.target.dataset.date);
+        });
 
-            days += '</tr>';
-        }
-
-        const monthName = date.toLocaleString('default', { month: 'long' });
-        this._popup.innerHTML = `
-            <div>
-                <div>
-                    <span>&lt;</span>
-                    <span>${monthName}</<span>
-                    <span>${date.getFullYear()}</span>
-                    <span><br>
-                    Day Of Week = ${dayOfWeek} ${totalDays}<br>
-                    Days In Month = ${daysInMonth}<br>
-                    Days In Prev Month = ${daysInPrevMonth}<br>
-                    Start In Prev Month = ${startDaysInPrevMonth}
-                    </span>
-                    <span>&gt;</span>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    ${days}
-                    </tbody>
-                </table>
-            </div>
-        `;
+        const builder = new DateBuilder(this._date, this._date, this._popup);
+        builder.build();
     }
 }
 
