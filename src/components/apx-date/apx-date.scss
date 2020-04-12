@@ -131,6 +131,7 @@ input {
     padding: .6rem .4rem .6rem .4rem;
     border: var(--border-heavy-style, 1px solid) var(--border-medium-color, #757575);
     border-radius: var(--border-radius-big, 15px);
+    color: var(--text-color, black);
     background-color: var(--border-light-color, #ccc);
 
     &:focus {
