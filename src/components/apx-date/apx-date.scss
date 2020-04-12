@@ -51,8 +51,8 @@
    align-self: stretch;
 
    border-left: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
-   border-top-right-radius: var(--border-radius-input, 10px);
-   border-bottom-right-radius: var(--border-radius-input, 10px);
+   border-top-right-radius: var(--border-radius-button, 5px);
+   border-bottom-right-radius: var(--border-radius-button, 5px);
    font-size: .8rem;
    
    color: var(--primary-font-color, white);
@@ -71,11 +71,15 @@
 
 .left-arrow {
     position: absolute;
+    text-align: left;
+    width: 2rem;
     left: 5px;
 }
 
 .right-arrow {
     position: absolute;
+    text-align: right;
+    width: 2rem;
     right: 5px;
 }
 

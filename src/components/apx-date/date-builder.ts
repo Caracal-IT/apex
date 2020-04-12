@@ -1,16 +1,26 @@
 export class DateBuilder {
+    private currDate: Date;
+    private date: Date;
+
     private startDay: number;
     private monthName: string;
     private today = new Date();
 
     private table: HTMLTableElement;
 
-    constructor(private currDate, private date: Date, private container: HTMLDivElement) {
-        this.startDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
-        this.monthName = this.date.toLocaleString('default', { month: 'long' });
+    constructor(private container: HTMLDivElement) {
+        
     }
 
-    build() {
+    build(currDate: Date, date: Date) {
+        this.currDate = currDate;
+        this.date = date;
+
+        this.startDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
+        this.monthName = this.date.toLocaleString('default', { month: 'long' });
+
+        this.container.innerHTML = '';
+
         this.createTable();
         this.createHeader();
         this.createWeekDays();

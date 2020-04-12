@@ -1,8 +1,10 @@
 import css from './apx-date.scss';
 
 import {DateBuilder} from './date-builder';
+import { Context } from 'caracal_polaris/dist/types/model/context.model';
 
 export class DateControl extends HTMLElement {
+    private _builder: DateBuilder;
     private _caption: HTMLSpanElement;
     private _dateContainer: HTMLDivElement;
     private _label: HTMLSpanElement;
@@ -12,9 +14,18 @@ export class DateControl extends HTMLElement {
     private _value: string;
 
     caption: string;
+    ctx: Context;
     
-    get value() { return this._value; }
-    set value(value) { this._value = value; }
+    get value() { 
+        return this._value||''; 
+    }
+    set value(value) { 
+        if(value === '' || Date.parse(value) === NaN)
+            return;
+
+        this._date = new Date(value);
+        this._value = value; 
+    }
 
     constructor(){
         super();
@@ -45,23 +56,18 @@ export class DateControl extends HTMLElement {
     connectedCallback() {
         this._caption.textContent = this.caption;
         this._label.textContent = '';
+
+        if(this.value)
+            this._label.textContent = this._date.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
+
         this._calendar.innerHTML = '<div>&#x25BC;</div>';
 
-        this._calendar.addEventListener('click', () => {
-            this._popup.classList.toggle("hidden");
+        this._calendar.addEventListener('click', (event: any) => {
+            this.hideShowPopup(event);
         });
 
         this._dateContainer.addEventListener('click', (event: any) => {
-            if(event.target.dataset.action === 'month') return;
-            if(event.target.dataset.action === 'year') return;
-            if(event.target.dataset.action === 'left-arrow') return;
-            if(event.target.dataset.action === 'right-arrow') return;
-
-            this._popup.classList.toggle("hidden");
-        });
-
-        this._calendar.addEventListener('click', () => {
-            this._popup.classList.toggle("hidden");
+            this.hideShowPopup(event);
         });
 
         this._dateContainer.addEventListener('mouseleave', () => {
@@ -71,14 +77,12 @@ export class DateControl extends HTMLElement {
         this._dateContainer.addEventListener('blur', () => {
             this._popup.classList.add("hidden");
         });
-    }
-
-    private createPopup() {
-        this._popup = document.createElement('div');
-        this._popup.className = 'popup hidden';
-        this._dateContainer.appendChild(this._popup);
 
         this._popup.addEventListener('click', (event: any) => {
+            const parent = this.shadowRoot.querySelector("table");
+            if(parent && parent.contains(event.target))
+                event.cancelBubble = true;
+            
             if(event.target.dataset.action === 'month') return;
             if(event.target.dataset.action === 'year') return;
 
@@ -89,9 +93,7 @@ export class DateControl extends HTMLElement {
                 if(event.target.dataset.action === 'right-arrow')
                     newDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
 
-                this._popup.innerHTML = '';
-                const builder = new DateBuilder(this._date, newDate, this._popup);
-                builder.build();
+                this._builder.build(this._date, newDate);
 
                 return;
             }
@@ -106,14 +108,35 @@ export class DateControl extends HTMLElement {
 
             event.target.classList.add('selected');
 
-
             this._date = new Date(event.target.dataset.date);
             this._label.textContent = this._date.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
-            this._popup.classList.remove("hidden");
+            this.value = `${this._date.getFullYear()}/${this._date.getMonth() + 1}/${this._date.getDate()}`;
+            this._popup.classList.add("hidden");
+            this.dispatchEvent(new Event('input'));
         });
+    }
 
-        const builder = new DateBuilder(this._date, this._date, this._popup);
-        builder.build();
+    private createPopup() {
+        this._popup = document.createElement('div');
+        this._popup.className = 'popup hidden';
+        this._dateContainer.appendChild(this._popup);
+        this._builder = new DateBuilder(this._popup);
+
+        this._builder.build(this._date, this._date);
+    }
+
+    private hideShowPopup(event: any) {
+        event.cancelBubble = true;
+
+        const parent = this.shadowRoot.querySelector("table");
+
+        if(parent && parent.contains(event.target))
+            return;
+
+        if(this._popup.classList.contains("hidden"))
+            this._builder.build(this._date, this._date);
+
+        this._popup.classList.toggle("hidden");
     }
 }
 
