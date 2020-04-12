@@ -2,7 +2,7 @@ import { DateControl } from "./apx-date";
 import { DateBuilder } from "./date-builder";
 
 export class DateEventHandler {
-   // private _event: any;
+    private _event: any;
 
     constructor(
         private container: DateControl, 
@@ -10,11 +10,8 @@ export class DateEventHandler {
         private builder: DateBuilder) { }
 
     handle(event: any){
-       // this._event = event;
-        const parent = this.popup.querySelector("table")
-
-        if(parent && parent.contains(event.target))
-            event.cancelBubble = true;
+        this._event = event;
+        this.cancelBubble();
         
         if(event.target.dataset.action === 'month') {
             this.builder.buildMonths();
@@ -87,7 +84,10 @@ export class DateEventHandler {
         this.container.dispatchEvent(new Event('input'));
     }
 
-   // private cancelBubble() {
+    private cancelBubble() {
+        const parent = this.popup.querySelector("table")
 
-    //}
+        if(parent && parent.contains(this._event.target))
+            this._event.cancelBubble = true;
+    }
 }
