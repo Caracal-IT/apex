@@ -43,8 +43,10 @@ export class DateBuilder {
         td.appendChild(header);
         
         this.createHeaderItem(header, "<", "left-arrow");
+        this.createHeaderItem(header, "clear", "clear-label");
         this.createHeaderItem(header, this.monthName, "month");
         this.createHeaderItem(header, this.date.getFullYear()+'', "year");
+        this.createHeaderItem(header, "today", "today-label");
         this.createHeaderItem(header, ">", "right-arrow");
     }
 

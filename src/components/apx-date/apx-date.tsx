@@ -94,6 +94,21 @@ export class DateControl extends HTMLElement {
         if(event.target.dataset.action === 'month') return;
         if(event.target.dataset.action === 'year') return;
 
+        if(event.target.dataset.action === 'clear-label') {
+            this.value = '';
+            this._popup.classList.add("hidden");
+            this.dispatchEvent(new Event('input'));
+            return;
+        }
+
+        if(event.target.dataset.action === 'today-label'){
+            const date = new Date();
+            this.value = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+            this._popup.classList.add("hidden");
+            this.dispatchEvent(new Event('input'));
+            return;
+        }
+
         if(event.target.dataset.action === 'left-arrow' || event.target.dataset.action === 'right-arrow'){
             const date = new Date(event.target.dataset.date);
             let newDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());

@@ -69,17 +69,31 @@
     text-align: center;
 }
 
+.clear-label,
+.today-label {
+    padding: 0 1rem;
+    font-weight: 600;
+    color: var(--primary-color, green);
+}
+
+.clear-label:hover,
+.today-label:hover {
+    padding: 0 1rem;
+    font-weight: 600;
+    color: var(--primary-light-color, lime);
+}
+
 .left-arrow {
     position: absolute;
     text-align: left;
-    width: 2rem;
+    width: 1.2rem;
     left: 5px;
 }
 
 .right-arrow {
     position: absolute;
     text-align: right;
-    width: 2rem;
+    width: 1.1rem;
     right: 5px;
 }
 
