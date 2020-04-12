@@ -1,7 +1,6 @@
 import css from './apx-date.scss';
 
 import {DateBuilder} from './date-builder';
-import { Context } from 'caracal_polaris/dist/types/model/context.model';
 
 export class DateControl extends HTMLElement {
     private _builder: DateBuilder;
@@ -18,7 +17,6 @@ export class DateControl extends HTMLElement {
     private _hidePopupHandler: EventListener;
 
     caption: string;
-    ctx: Context;
     
     get value() { 
         return this._value||''; 
