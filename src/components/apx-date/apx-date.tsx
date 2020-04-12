@@ -13,6 +13,8 @@ export class DateControl extends HTMLElement {
     private _date = new Date();
     private _value: string;
 
+    private _popupClickHandler: EventListener;
+
     caption: string;
     ctx: Context;
     
@@ -51,6 +53,8 @@ export class DateControl extends HTMLElement {
         this._dateContainer.appendChild(this._calendar);
 
         this.createPopup();
+
+        this._popupClickHandler = this.popupClickHandler.bind(this);
     }
 
     connectedCallback() {
@@ -78,42 +82,44 @@ export class DateControl extends HTMLElement {
             this._popup.classList.add("hidden");
         });
 
-        this._popup.addEventListener('click', (event: any) => {
-            const parent = this.shadowRoot.querySelector("table");
-            if(parent && parent.contains(event.target))
-                event.cancelBubble = true;
-            
-            if(event.target.dataset.action === 'month') return;
-            if(event.target.dataset.action === 'year') return;
+        this._popup.addEventListener('click', this._popupClickHandler);
+    }
 
-            if(event.target.dataset.action === 'left-arrow' || event.target.dataset.action === 'right-arrow'){
-                const date = new Date(event.target.dataset.date);
-                let newDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
+    popupClickHandler(event: any) {
+        const parent = this.shadowRoot.querySelector("table");
+        if(parent && parent.contains(event.target))
+            event.cancelBubble = true;
+        
+        if(event.target.dataset.action === 'month') return;
+        if(event.target.dataset.action === 'year') return;
 
-                if(event.target.dataset.action === 'right-arrow')
-                    newDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
+        if(event.target.dataset.action === 'left-arrow' || event.target.dataset.action === 'right-arrow'){
+            const date = new Date(event.target.dataset.date);
+            let newDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
 
-                this._builder.build(this._date, newDate);
+            if(event.target.dataset.action === 'right-arrow')
+                newDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
 
-                return;
-            }
+            this._builder.build(this._date, newDate);
 
-            if(!event.target.dataset.date)
-                return;
+            return;
+        }
 
-            const selected = this._popup.querySelector('.selected');
+        if(!event.target.dataset.date)
+            return;
 
-            if(selected)
-                selected.classList.remove('selected');
+        const selected = this._popup.querySelector('.selected');
 
-            event.target.classList.add('selected');
+        if(selected)
+            selected.classList.remove('selected');
 
-            this._date = new Date(event.target.dataset.date);
-            this._label.textContent = this._date.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
-            this.value = `${this._date.getFullYear()}/${this._date.getMonth() + 1}/${this._date.getDate()}`;
-            this._popup.classList.add("hidden");
-            this.dispatchEvent(new Event('input'));
-        });
+        event.target.classList.add('selected');
+
+        this._date = new Date(event.target.dataset.date);
+        this._label.textContent = this._date.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
+        this.value = `${this._date.getFullYear()}/${this._date.getMonth() + 1}/${this._date.getDate()}`;
+        this._popup.classList.add("hidden");
+        this.dispatchEvent(new Event('input'));
     }
 
     private createPopup() {
