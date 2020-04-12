@@ -167,5 +167,4 @@ export class DateBuilder {
     private getMonthName(month: number, format = 'short') {
         return (new Date(0, month, 1)) .toLocaleString('default', { month: format });
     }
-
 }

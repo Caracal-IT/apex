@@ -1,21 +1,23 @@
 import css from './apx-date.scss';
 
 import {DateBuilder} from './date-builder';
+import { DateEventHandler } from './date-event-handlers';
 
 export class DateControl extends HTMLElement {
     private _builder: DateBuilder;
+    private _dateHandler: DateEventHandler;
     private _caption: HTMLSpanElement;
     private _dateContainer: HTMLDivElement;
     private _label: HTMLSpanElement;
     private _calendar: HTMLSpanElement;
     private _popup: HTMLDivElement;
-    private _value: Date;
 
     private _popupClickHandler: EventListener;
     private _togglePopupHandler: EventListener;
     private _hidePopupHandler: EventListener;
 
     caption: string;
+    _value: Date;
     
     get value() { 
         if(!this._value)
@@ -57,6 +59,8 @@ export class DateControl extends HTMLElement {
 
         this.createPopup();
 
+        this._dateHandler = new DateEventHandler(this, this._popup, this._builder);
+
         this._popupClickHandler = this.popupClickHandler.bind(this);
         this._togglePopupHandler = this.togglePopupHandler.bind(this);
         this._hidePopupHandler = this.hidePopupHandler.bind(this);
@@ -87,81 +91,7 @@ export class DateControl extends HTMLElement {
     }
 
     private popupClickHandler(event: any) {
-        const parent = this.shadowRoot.querySelector("table");
-        if(parent && parent.contains(event.target))
-            event.cancelBubble = true;
-        
-        if(event.target.dataset.action === 'month') {
-            this._builder.buildMonths();
-            return;
-        }
-
-        if(event.target.dataset.action === 'select-month') {
-            const month = event.target.dataset.month;
-
-            const date = new Date(this._builder.date.getFullYear(), month, 1);
-            this._builder.buildDays(this._value, date);
-            return;
-        }
-
-        if(event.target.dataset.action === 'year') { 
-            this._builder.buildYears();
-            return; 
-        }
-
-        if(event.target.dataset.action === 'set-year') { 
-            const year = this.shadowRoot.querySelector('input').value;
-            
-            if(!/^\d{4}$/.test(year))
-                return;
-
-            const date = new Date(+year, this._builder.date.getMonth(), 1);
-            this._builder.buildDays(this._value, date);
-            return; 
-        }
-
-        
-
-        if(event.target.dataset.action === 'clear-label') {
-            this.value = '';
-            this._popup.classList.add("hidden");
-            this.dispatchEvent(new Event('input'));
-            return;
-        }
-
-        if(event.target.dataset.action === 'today-label'){
-            const date = new Date();
-            this.value = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-            this._popup.classList.add("hidden");
-            this.dispatchEvent(new Event('input'));
-            return;
-        }
-
-        if(event.target.dataset.action === 'left-arrow' || event.target.dataset.action === 'right-arrow'){
-            const date = new Date(event.target.dataset.date);
-            let newDate = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
-
-            if(event.target.dataset.action === 'right-arrow')
-                newDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
-
-            this._builder.buildDays(this._value, newDate);
-
-            return;
-        }
-
-        if(!event.target.dataset.date)
-            return;
-
-        const selected = this._popup.querySelector('.selected');
-
-        if(selected)
-            selected.classList.remove('selected');
-
-        event.target.classList.add('selected');
-
-        this.value = event.target.dataset.date;
-        this._popup.classList.add("hidden");
-        this.dispatchEvent(new Event('input'));
+        this._dateHandler.handle(event);
     }
 
     private togglePopupHandler(event: any) {
