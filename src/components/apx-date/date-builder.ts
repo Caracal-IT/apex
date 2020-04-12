@@ -8,13 +8,11 @@ export class DateBuilder {
 
     private table: HTMLTableElement;
 
-    constructor(private container: HTMLDivElement) {
-        
-    }
+    constructor(private container: HTMLDivElement) { }
 
     build(currDate: Date, date: Date) {
         this.currDate = currDate;
-        this.date = date;
+        this.date = date||new Date();
 
         this.startDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
         this.monthName = this.date.toLocaleString('default', { month: 'long' });
@@ -105,7 +103,7 @@ export class DateBuilder {
         if(this.isDatesEqual(this.today, currDate))
             td.classList.add('today');
 
-        if(this.isDatesEqual(this.currDate, currDate))
+        if(this.currDate && this.isDatesEqual(this.currDate, currDate))
             td.classList.add('selected');
 
         td.textContent = `${currDate.getDate()}`;

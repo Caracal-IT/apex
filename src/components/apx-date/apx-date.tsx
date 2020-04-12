@@ -9,8 +9,7 @@ export class DateControl extends HTMLElement {
     private _label: HTMLSpanElement;
     private _calendar: HTMLSpanElement;
     private _popup: HTMLDivElement;
-    private _date = new Date();
-    private _value: string;
+    private _value: Date;
 
     private _popupClickHandler: EventListener;
     private _togglePopupHandler: EventListener;
@@ -19,14 +18,18 @@ export class DateControl extends HTMLElement {
     caption: string;
     
     get value() { 
-        return this._value||''; 
+        if(!this._value)
+            return '';
+
+        return `${this._value.getFullYear()}/${this._value.getMonth() + 1}/${this._value.getDate()}`; 
     }
     set value(value) { 
-        if(value === '' || Date.parse(value) === NaN)
-            return;
+        if(value === '' || Date.parse(value) === NaN) 
+            this._value = null;
+        else
+            this._value = new Date(value);
 
-        this._date = new Date(value);
-        this._value = value; 
+        this.setLabelText();
     }
 
     constructor(){
@@ -61,11 +64,7 @@ export class DateControl extends HTMLElement {
 
     connectedCallback() {
         this._caption.textContent = this.caption;
-        this._label.textContent = '';
-
-        if(this.value)
-            this._label.textContent = this._date.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
-
+        this.setLabelText();
         this._calendar.innerHTML = '<div>&#x25BC;</div>';
 
         this._calendar.addEventListener('click', this._togglePopupHandler);
@@ -102,7 +101,7 @@ export class DateControl extends HTMLElement {
             if(event.target.dataset.action === 'right-arrow')
                 newDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
 
-            this._builder.build(this._date, newDate);
+            this._builder.build(this._value, newDate);
 
             return;
         }
@@ -117,9 +116,7 @@ export class DateControl extends HTMLElement {
 
         event.target.classList.add('selected');
 
-        this._date = new Date(event.target.dataset.date);
-        this._label.textContent = this._date.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
-        this.value = `${this._date.getFullYear()}/${this._date.getMonth() + 1}/${this._date.getDate()}`;
+        this.value = event.target.dataset.date;
         this._popup.classList.add("hidden");
         this.dispatchEvent(new Event('input'));
     }
@@ -133,7 +130,7 @@ export class DateControl extends HTMLElement {
             return;
 
         if(this._popup.classList.contains("hidden"))
-            this._builder.build(this._date, this._date);
+            this._builder.build(this._value, this._value);
 
         this._popup.classList.toggle("hidden");
     }
@@ -148,7 +145,18 @@ export class DateControl extends HTMLElement {
         this._dateContainer.appendChild(this._popup);
         this._builder = new DateBuilder(this._popup);
 
-        this._builder.build(this._date, this._date);
+        this._builder.build(this._value, this._value);
+    }
+
+    private setLabelText() {
+        if(!this._label)
+            return;
+
+        this._label.textContent = '';
+
+        if(this._value)
+            this._label.textContent = this._value.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
+
     }
 }
 
