@@ -104,12 +104,12 @@ ul {
     border-bottom-right-radius: var(--border-radius-input, 10px);
 
     color: var(--text-color, black);
+    border-color: var(--primary-color, green);
     background-color: var(--input-background, white);
 
     width: calc(100% - 2.8rem + 2px);
     max-height: 0;
     height: 0;
-    border-color: var(--primary-color, green);
     top: 4.1rem;
     overflow-y: auto;
     

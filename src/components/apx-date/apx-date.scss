@@ -27,14 +27,14 @@
     background-color: var(--input-background, white);
 
     height: 2.5rem;
-}
 
-.dateContainer:focus {
-    outline: none;
-    margin: 0;
-    border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
-
-    height: calc(2.5rem - 2px);
+    &:focus {
+        outline: none;
+        margin: 0;
+        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+    
+        height: calc(2.5rem - 2px);
+    }
 }
 
 .dateLabel {
@@ -64,9 +64,37 @@
    right: 0;
 }
 
+.popup {
+    position: absolute;
+
+    text-align: center;
+    background-color: transparent;
+
+    width: 100%;
+    top: 2.5rem;
+   
+    z-index: 9999999;
+
+    table {
+        border: var(--border-heavy-style, 2px solid) var(--border-medium-color, #757575);
+        padding: 5px;
+        border-radius: var(--border-radius-big, 15px);
+
+        background-color: var(--border-light-color, #ccc);
+        box-shadow: 4px 4px 4px rgba($color: #000000, $alpha: 0.4);
+        width: 20rem;
+        height: 15rem;
+
+        td {
+            border-radius: 100%;
+            width: 2rem;
+            cursor: pointer;
+        }
+    }
+}
+
 .header {
     position: relative;
-    text-align: center;
 }
 
 .clear-label,
@@ -74,27 +102,24 @@
     padding: 0 1rem;
     font-weight: 600;
     color: var(--primary-color, green);
+
+    &:hover {
+        color: var(--primary-light-color, lime);
+    }
 }
 
-.clear-label:hover,
-.today-label:hover {
-    padding: 0 1rem;
-    font-weight: 600;
-    color: var(--primary-light-color, lime);
+.left-arrow,
+.right-arrow {
+    position: absolute;
+    width: 1.2rem;
 }
 
 .left-arrow {
-    position: absolute;
-    text-align: left;
-    width: 1.2rem;
-    left: 5px;
+    left: 0;
 }
 
 .right-arrow {
-    position: absolute;
-    text-align: right;
-    width: 1.1rem;
-    right: 5px;
+    right: 0;
 }
 
 .month {
@@ -102,35 +127,10 @@
     font-weight: 800;
 }
 
-.popup {
-    position: absolute;
-
-    width: 100%;
-    top: 2.5rem;
-    background-color: transparent;
-    z-index: 9999999;
-
-    table {
-        box-shadow: 4px 4px 4px rgba($color: #000000, $alpha: 0.4);
-    }
-}
-
-.popup table {
-    border: var(--border-heavy-style, 2px solid) var(--border-medium-color, #757575);
-    padding: 5px;
-    border-radius: 15px;
-
-    background-color: var(--border-light-color, #ccc);
-    width: 20rem;
-    height: 15rem;
-}
-
-.popup table input {
-    margin: 5px 1px;
+input {
     padding: .6rem .4rem .6rem .4rem;
     border: var(--border-heavy-style, 1px solid) var(--border-medium-color, #757575);
-    border-radius: 15px;
-
+    border-radius: var(--border-radius-big, 15px);
     background-color: var(--border-light-color, #ccc);
 
     &:focus {
@@ -143,13 +143,6 @@
 .set-year {
     font-weight: 600;
     color: var(--primary-color, green);
-}
-
-td {
-    text-align: center;
-    border-radius: 100%;
-    width: 2rem;
-    cursor: pointer;
 }
 
 .disable {
