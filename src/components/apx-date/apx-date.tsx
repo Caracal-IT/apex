@@ -85,7 +85,11 @@ export class DateControl extends HTMLElement {
         this._popup.addEventListener('click', this._popupClickHandler);
     }
 
-    popupClickHandler(event: any) {
+    disconnectedCallback() {
+        this._popup.removeEventListener('click', this._popupClickHandler);
+    }
+
+    private popupClickHandler(event: any) {
         const parent = this.shadowRoot.querySelector("table");
         if(parent && parent.contains(event.target))
             event.cancelBubble = true;
