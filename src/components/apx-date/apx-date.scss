@@ -121,6 +121,28 @@
     border-radius: 15px;
 
     background-color: var(--border-light-color, #ccc);
+    width: 20rem;
+    height: 15rem;
+}
+
+.popup table input {
+    margin: 5px 1px;
+    padding: .6rem .4rem .6rem .4rem;
+    border: var(--border-heavy-style, 1px solid) var(--border-medium-color, #757575);
+    border-radius: 15px;
+
+    background-color: var(--border-light-color, #ccc);
+
+    &:focus {
+        outline: none;
+        margin: 3px 0;
+        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+    }
+}
+
+.set-year {
+    font-weight: 600;
+    color: var(--primary-color, green);
 }
 
 td {

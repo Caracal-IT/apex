@@ -91,8 +91,36 @@ export class DateControl extends HTMLElement {
         if(parent && parent.contains(event.target))
             event.cancelBubble = true;
         
-        if(event.target.dataset.action === 'month') return;
-        if(event.target.dataset.action === 'year') return;
+        if(event.target.dataset.action === 'month') {
+            this._builder.buildMonths();
+            return;
+        }
+
+        if(event.target.dataset.action === 'select-month') {
+            const month = event.target.dataset.month;
+
+            const date = new Date(this._builder.date.getFullYear(), month, 1);
+            this._builder.buildDays(this._value, date);
+            return;
+        }
+
+        if(event.target.dataset.action === 'year') { 
+            this._builder.buildYears();
+            return; 
+        }
+
+        if(event.target.dataset.action === 'set-year') { 
+            const year = this.shadowRoot.querySelector('input').value;
+            
+            if(!/^\d{4}$/.test(year))
+                return;
+
+            const date = new Date(+year, this._builder.date.getMonth(), 1);
+            this._builder.buildDays(this._value, date);
+            return; 
+        }
+
+        
 
         if(event.target.dataset.action === 'clear-label') {
             this.value = '';
@@ -116,7 +144,7 @@ export class DateControl extends HTMLElement {
             if(event.target.dataset.action === 'right-arrow')
                 newDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
 
-            this._builder.build(this._value, newDate);
+            this._builder.buildDays(this._value, newDate);
 
             return;
         }
@@ -139,18 +167,21 @@ export class DateControl extends HTMLElement {
     private togglePopupHandler(event: any) {
         event.cancelBubble = true;
 
-        const parent = this.shadowRoot.querySelector("table");
+        const parent = this.shadowRoot.querySelector('table');
 
         if(parent && parent.contains(event.target))
             return;
 
         if(this._popup.classList.contains("hidden"))
-            this._builder.build(this._value, this._value);
+            this._builder.buildDays(this._value, this._value);
 
         this._popup.classList.toggle("hidden");
     }
 
-    private hidePopupHandler() {
+    private hidePopupHandler(event: any) {
+        if(event.relatedTarget.tagName === 'INPUT')
+            return;
+
         this._popup.classList.add("hidden");
     }
 
@@ -160,7 +191,7 @@ export class DateControl extends HTMLElement {
         this._dateContainer.appendChild(this._popup);
         this._builder = new DateBuilder(this._popup);
 
-        this._builder.build(this._value, this._value);
+        this._builder.buildDays(this._value, this._value);
     }
 
     private setLabelText() {

@@ -1,6 +1,5 @@
 export class DateBuilder {
     private currDate: Date;
-    private date: Date;
 
     private startDay: number;
     private monthName: string;
@@ -8,14 +7,16 @@ export class DateBuilder {
 
     private table: HTMLTableElement;
 
+    date: Date;
+
     constructor(private container: HTMLDivElement) { }
 
-    build(currDate: Date, date: Date) {
+    buildDays(currDate: Date, date: Date) {
         this.currDate = currDate;
         this.date = date||new Date();
 
         this.startDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
-        this.monthName = this.date.toLocaleString('default', { month: 'long' });
+        this.monthName = this.getMonthName(this.date.getMonth(), 'long');
 
         this.container.innerHTML = '';
 
@@ -23,6 +24,49 @@ export class DateBuilder {
         this.createHeader();
         this.createWeekDays();
         this.createDays();
+    }
+
+    buildMonths(){
+        this.container.innerHTML = '';
+
+        this.createTable();
+
+        for(let i = 0; i < 4; i++) {
+            const tr = document.createElement('tr');
+            this.table.appendChild(tr);
+
+            for(let j = 0; j < 3; j++) {
+                const td = document.createElement('td');
+                td.dataset.action = 'select-month';
+                td.dataset.month = `${j + i * 3}`;
+                td.textContent = this.getMonthName(j + i * 3);
+                tr.appendChild(td);
+            }
+        }
+    }
+
+    buildYears(){
+        this.container.innerHTML = '';
+
+        this.createTable();
+        
+        const tr = document.createElement('tr');
+        this.table.appendChild(tr);
+
+        const td = document.createElement('td');
+        tr.appendChild(td);
+
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.value = this.date.getFullYear().toString();
+        input.maxLength = 4;
+        td.appendChild(input);
+
+        const td2 = document.createElement('td');
+        td2.textContent = "Select";
+        td2.className = 'set-year';
+        td2.dataset.action = 'set-year';
+        tr.appendChild(td2);
     }
 
     private createTable() {
@@ -112,11 +156,16 @@ export class DateBuilder {
         td.dataset.date = `${currDate.getFullYear()}/${currDate.getMonth() + 1}/${currDate.getDate()}`;
     }
 
-     private isDatesEqual(date1: Date, date2: Date) {
+    private isDatesEqual(date1: Date, date2: Date) {
         return (
             date1.getFullYear() === date2.getFullYear() 
             && date1.getMonth() === date2.getMonth()
             && date1.getDate() === date2.getDate()
         );
     }
+
+    private getMonthName(month: number, format = 'short') {
+        return (new Date(0, month, 1)) .toLocaleString('default', { month: format });
+    }
+
 }
