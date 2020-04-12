@@ -72,8 +72,6 @@ export class DateControl extends HTMLElement {
     private createInput() {
         this.createCaption();
         this.createInputContainer();
-        this.createValueLabel();
-        this.createDropDownIcon();
     }
 
     private createCaption() {
@@ -87,13 +85,9 @@ export class DateControl extends HTMLElement {
         this._inputContainer.className = "dateContainer";
         this._inputContainer.tabIndex = 10;
         this.shadowRoot.appendChild(this._inputContainer);
-    }
 
-    private createDropDownIcon() {
-        this._dropdown = document.createElement('span');
-        this._dropdown.innerHTML = '<div>&#x25BC;</div>';
-        this._dropdown.className = "dropdown";
-        this._inputContainer.appendChild(this._dropdown);
+        this.createValueLabel();
+        this.createDropDownIcon();
     }
 
     private createValueLabel () {
@@ -102,6 +96,13 @@ export class DateControl extends HTMLElement {
         this._inputContainer.appendChild(this._valueLabel);
     }
 
+    private createDropDownIcon() {
+        this._dropdown = document.createElement('span');
+        this._dropdown.innerHTML = '<div>&#x25BC;</div>';
+        this._dropdown.className = "dropdown";
+        this._inputContainer.appendChild(this._dropdown);
+    }
+    
     private createPopup() {
         this._popup = document.createElement('div');
         this._popup.className = 'popup hidden';
