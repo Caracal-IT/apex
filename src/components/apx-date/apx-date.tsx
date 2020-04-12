@@ -98,7 +98,7 @@ export class DateControl extends HTMLElement {
 
     private createValueLabel () {
         this._valueLabel = document.createElement('span');
-        this._valueLabel.className = "dateLabel";
+        this._valueLabel.className = "valueLabel";
         this._inputContainer.appendChild(this._valueLabel);
     }
 
