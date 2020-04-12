@@ -14,6 +14,8 @@ export class DateControl extends HTMLElement {
     private _value: string;
 
     private _popupClickHandler: EventListener;
+    private _togglePopupHandler: EventListener;
+    private _hidePopupHandler: EventListener;
 
     caption: string;
     ctx: Context;
@@ -55,6 +57,8 @@ export class DateControl extends HTMLElement {
         this.createPopup();
 
         this._popupClickHandler = this.popupClickHandler.bind(this);
+        this._togglePopupHandler = this.togglePopupHandler.bind(this);
+        this._hidePopupHandler = this.hidePopupHandler.bind(this);
     }
 
     connectedCallback() {
@@ -66,26 +70,22 @@ export class DateControl extends HTMLElement {
 
         this._calendar.innerHTML = '<div>&#x25BC;</div>';
 
-        this._calendar.addEventListener('click', (event: any) => {
-            this.hideShowPopup(event);
-        });
+        this._calendar.addEventListener('click', this._togglePopupHandler);
+        this._dateContainer.addEventListener('click', this._togglePopupHandler);
 
-        this._dateContainer.addEventListener('click', (event: any) => {
-            this.hideShowPopup(event);
-        });
-
-        this._dateContainer.addEventListener('mouseleave', () => {
-            this._popup.classList.add("hidden");
-        });
-
-        this._dateContainer.addEventListener('blur', () => {
-            this._popup.classList.add("hidden");
-        });
+        this._dateContainer.addEventListener('mouseleave', this._hidePopupHandler);
+        this._dateContainer.addEventListener('blur', this._hidePopupHandler);
 
         this._popup.addEventListener('click', this._popupClickHandler);
     }
 
     disconnectedCallback() {
+        this._calendar.removeEventListener('click', this._togglePopupHandler);
+        this._dateContainer.removeEventListener('click', this._togglePopupHandler);
+
+        this._dateContainer.removeEventListener('mouseleave', this._hidePopupHandler);
+        this._dateContainer.removeEventListener('blur', this._hidePopupHandler);
+
         this._popup.removeEventListener('click', this._popupClickHandler);
     }
 
@@ -126,16 +126,7 @@ export class DateControl extends HTMLElement {
         this.dispatchEvent(new Event('input'));
     }
 
-    private createPopup() {
-        this._popup = document.createElement('div');
-        this._popup.className = 'popup hidden';
-        this._dateContainer.appendChild(this._popup);
-        this._builder = new DateBuilder(this._popup);
-
-        this._builder.build(this._date, this._date);
-    }
-
-    private hideShowPopup(event: any) {
+    private togglePopupHandler(event: any) {
         event.cancelBubble = true;
 
         const parent = this.shadowRoot.querySelector("table");
@@ -147,6 +138,19 @@ export class DateControl extends HTMLElement {
             this._builder.build(this._date, this._date);
 
         this._popup.classList.toggle("hidden");
+    }
+
+    private hidePopupHandler() {
+        this._popup.classList.add("hidden");
+    }
+
+    private createPopup() {
+        this._popup = document.createElement('div');
+        this._popup.className = 'popup hidden';
+        this._dateContainer.appendChild(this._popup);
+        this._builder = new DateBuilder(this._popup);
+
+        this._builder.build(this._date, this._date);
     }
 }
 
