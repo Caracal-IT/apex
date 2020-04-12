@@ -9,7 +9,31 @@ export class DateEventHandler {
         private popup: HTMLDivElement, 
         private builder: DateBuilder) { }
 
-    handle(event: any){
+    handleHide(event: any) {
+        this._event = event;
+        
+        if(this._event.relatedTarget?.tagName === 'INPUT')
+            return;
+
+        this.popup.classList.add("hidden");
+    }
+
+    handleToggle(event: any) {
+        this._event = event;
+
+        this._event.cancelBubble = true;
+        const parent = this.container.shadowRoot.querySelector('table');
+
+        if(parent && parent.contains(event.target))
+            return;
+
+        if(this.popup.classList.contains("hidden"))
+            this.builder.buildDays(this.container._value, this.container._value);
+
+        this.popup.classList.toggle("hidden");
+    }
+
+    handleClick(event: any){
         this._event = event;
         this.cancelBubble();
 

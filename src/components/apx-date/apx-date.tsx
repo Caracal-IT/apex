@@ -6,10 +6,11 @@ import { DateEventHandler } from './date-event-handlers';
 export class DateControl extends HTMLElement {
     private _builder: DateBuilder;
     private _dateHandler: DateEventHandler;
+
     private _caption: HTMLSpanElement;
-    private _dateContainer: HTMLDivElement;
-    private _label: HTMLSpanElement;
-    private _calendar: HTMLSpanElement;
+    private _inputContainer: HTMLDivElement;
+    private _valueLabel: HTMLSpanElement;
+    private _dropdown: HTMLSpanElement;
     private _popup: HTMLDivElement;
 
     private _popupClickHandler: EventListener;
@@ -39,100 +40,92 @@ export class DateControl extends HTMLElement {
 
         this.attachShadow({mode: 'open'});
         this.shadowRoot.innerHTML = `<style>${css}</style>`;
-
-        this._caption = document.createElement('span');
-        this._caption.className = 'caption';
-        this.shadowRoot.appendChild(this._caption);
-
-        this._dateContainer = document.createElement('div');
-        this._dateContainer.className = "dateContainer";
-        this._dateContainer.tabIndex = 10;
-        this.shadowRoot.appendChild(this._dateContainer);
-
-        this._label = document.createElement('span');
-        this._label.className = "dateLabel";
-        this._dateContainer.appendChild(this._label);
-
-        this._calendar = document.createElement('span');
-        this._calendar.className = "calendar";
-        this._dateContainer.appendChild(this._calendar);
-
+        
+        this.createInput();
         this.createPopup();
-
-        this._dateHandler = new DateEventHandler(this, this._popup, this._builder);
-
-        this._popupClickHandler = this.popupClickHandler.bind(this);
-        this._togglePopupHandler = this.togglePopupHandler.bind(this);
-        this._hidePopupHandler = this.hidePopupHandler.bind(this);
+        this.createHandlers();
     }
 
     connectedCallback() {
         this._caption.textContent = this.caption;
         this.setLabelText();
-        this._calendar.innerHTML = '<div>&#x25BC;</div>';
 
-        this._calendar.addEventListener('click', this._togglePopupHandler);
-        this._dateContainer.addEventListener('click', this._togglePopupHandler);
+        this._dropdown.addEventListener('click', this._togglePopupHandler);
+        this._inputContainer.addEventListener('click', this._togglePopupHandler);
 
-        this._dateContainer.addEventListener('mouseleave', this._hidePopupHandler);
-        this._dateContainer.addEventListener('blur', this._hidePopupHandler);
+        this._inputContainer.addEventListener('mouseleave', this._hidePopupHandler);
+        this._inputContainer.addEventListener('blur', this._hidePopupHandler);
 
         this._popup.addEventListener('click', this._popupClickHandler);
     }
 
     disconnectedCallback() {
-        this._calendar.removeEventListener('click', this._togglePopupHandler);
-        this._dateContainer.removeEventListener('click', this._togglePopupHandler);
+        this._dropdown.removeEventListener('click', this._togglePopupHandler);
+        this._inputContainer.removeEventListener('click', this._togglePopupHandler);
 
-        this._dateContainer.removeEventListener('mouseleave', this._hidePopupHandler);
-        this._dateContainer.removeEventListener('blur', this._hidePopupHandler);
+        this._inputContainer.removeEventListener('mouseleave', this._hidePopupHandler);
+        this._inputContainer.removeEventListener('blur', this._hidePopupHandler);
 
         this._popup.removeEventListener('click', this._popupClickHandler);
     }
 
-    private popupClickHandler(event: any) {
-        this._dateHandler.handle(event);
+    private createInput() {
+        this.createCaption();
+        this.createInputContainer();
+        this.createValueLabel();
+        this.createDropDownIcon();
     }
 
-    private togglePopupHandler(event: any) {
-        event.cancelBubble = true;
-
-        const parent = this.shadowRoot.querySelector('table');
-
-        if(parent && parent.contains(event.target))
-            return;
-
-        if(this._popup.classList.contains("hidden"))
-            this._builder.buildDays(this._value, this._value);
-
-        this._popup.classList.toggle("hidden");
+    private createCaption() {
+        this._caption = document.createElement('span');
+        this._caption.className = 'caption';
+        this.shadowRoot.appendChild(this._caption);
     }
 
-    private hidePopupHandler(event: any) {
-        if(event.relatedTarget.tagName === 'INPUT')
-            return;
+    private createInputContainer() {
+        this._inputContainer = document.createElement('div');
+        this._inputContainer.className = "dateContainer";
+        this._inputContainer.tabIndex = 10;
+        this.shadowRoot.appendChild(this._inputContainer);
+    }
 
-        this._popup.classList.add("hidden");
+    private createDropDownIcon() {
+        this._dropdown = document.createElement('span');
+        this._dropdown.innerHTML = '<div>&#x25BC;</div>';
+        this._dropdown.className = "dropdown";
+        this._inputContainer.appendChild(this._dropdown);
+    }
+
+    private createValueLabel () {
+        this._valueLabel = document.createElement('span');
+        this._valueLabel.className = "dateLabel";
+        this._inputContainer.appendChild(this._valueLabel);
     }
 
     private createPopup() {
         this._popup = document.createElement('div');
         this._popup.className = 'popup hidden';
-        this._dateContainer.appendChild(this._popup);
+        this._inputContainer.appendChild(this._popup);
         this._builder = new DateBuilder(this._popup);
 
         this._builder.buildDays(this._value, this._value);
     }
 
+    private createHandlers() {
+        this._dateHandler = new DateEventHandler(this, this._popup, this._builder);
+        this._popupClickHandler = this._dateHandler.handleClick.bind(this._dateHandler);
+        this._togglePopupHandler = this._dateHandler.handleToggle.bind(this._dateHandler);
+        this._hidePopupHandler = this._dateHandler.handleHide.bind(this._dateHandler);
+    }
+
     private setLabelText() {
-        if(!this._label)
+        if(!this._valueLabel)
             return;
 
-        this._label.textContent = '';
+        this._valueLabel.textContent = '';
 
         if(this._value)
-            this._label.textContent = this._value.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
-
+            this._valueLabel.textContent = this._value.toLocaleDateString('default', { day:'numeric', month: 'long', year: 'numeric' });
     }
 }
 
