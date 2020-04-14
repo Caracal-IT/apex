@@ -1,13 +1,15 @@
+@import '../../assets/_variables.scss';
+
 :host {
     display: block;
     margin-bottom: 5px;
-    color: var(--text-color, black);
+    color: var(--primary-font-color $primary-font-color);
     user-select: none;
 }
 
 .caption {
     display: block;
-    color: var(--primary-color, green);
+    color: var(--primary-color, $primary-color);
 }
 
 .dateContainer {
@@ -18,20 +20,20 @@
     align-items: center;
 
     margin: 0 1px;
-    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
-    border-radius: var(--border-radius-input, 10px);
+    border: var(--border, $border);
+    border-radius: var(--border-radius-medium, $border-radius-medium);
 
     font: inherit;
     font-size: 1.2rem;
-    color: var(--text-color, black);
-    background-color: var(--input-background, white);
+    color: var(--primary-font-color $primary-font-color);
+    background-color: var(--input-background, $input-background);
 
     height: 2.5rem;
 
     &:focus {
         outline: none;
         margin: 0;
-        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+        border: var(--border-active, $border-active);
     
         height: calc(2.5rem - 2px);
     }
@@ -50,13 +52,13 @@
    flex-basis: 2.3rem;
    align-self: stretch;
 
-   border-left: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
-   border-top-right-radius: var(--border-radius-button, 5px);
-   border-bottom-right-radius: var(--border-radius-button, 5px);
+   border-left: var(--border, $border);
+   border-top-right-radius: var(--border-radius-small, $border-radius-small);
+   border-bottom-right-radius: var(--border-radius-small, $border-radius-small);
    font-size: .8rem;
    
-   color: var(--primary-font-color, white);
-   background-color: var(--primary-color, green);
+   color: var(--primary-bg-font-color, $primary-bg-font-color);
+   background-color: var(--primary-color, $primary-color);
 
    cursor: pointer;
 
@@ -76,12 +78,12 @@
     z-index: 9999999;
 
     table {
-        border: var(--border-heavy-style, 2px solid) var(--border-medium-color, #757575);
+        border: var(--border-in-active, $border-in-active);
         padding: 5px;
-        border-radius: var(--border-radius-big, 15px);
+        border-radius: var(--border-radius-large, $border-radius-large);
 
-        background-color: var(--border-light-color, #ccc);
-        box-shadow: 4px 4px 4px rgba($color: #000000, $alpha: 0.4);
+        background-color: var(--input-background-3, $input-background-3);
+        box-shadow: var(--shadow-medium, $shadow-medium);
         width: 20rem;
         height: 15rem;
 
@@ -101,10 +103,10 @@
 .today-label {
     padding: 0 1rem;
     font-weight: 600;
-    color: var(--primary-color, green);
+    color: var(--primary-color, $primary-color);
 
     &:hover {
-        color: var(--primary-light-color, lime);
+        color: var(--primary-color-hover, $primary-color-hover);
     }
 }
 
@@ -129,35 +131,35 @@
 
 input {
     padding: .6rem .4rem .6rem .4rem;
-    border: var(--border-heavy-style, 1px solid) var(--border-medium-color, #757575);
-    border-radius: var(--border-radius-big, 15px);
+    border: var(--border $border);
+    border-radius: var(--border-radius-large, $border-radius-large);
     color: var(--text-color, black);
-    background-color: var(--border-light-color, #ccc);
+    background-color: var(--input-background-3, $input-background-3);
 
     &:focus {
         outline: none;
         margin: 3px 0;
-        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+        border: var(--border-active, $border-active);
     }
 }
 
 .set-year {
     font-weight: 600;
-    color: var(--primary-color, green);
+    color: var(--primary-color, $primary-color);
 }
 
 .disable {
-    color: var(--border-medium-color, #757575);
+    color: var(--primary-font-disabled-color, $primary-font-disabled-color);
 }
 
 .today {
-    color: var(--text-alt-color, white);
-    background-color: var(--input-alt-background, #757575);
+    color: var(--primary-font-color, $primary-font-color);
+    background-color: var(--primary-font-disabled-color, $primary-font-disabled-color);
 }
 
 .selected {
-    color: var(--primary-font-color, white);
-    background-color: var(--primary-color, green);
+    color: var(--primary-bg-font-color, $primary-bg-font-color);
+    background-color: var(--primary-color, $primary-color);
 }
 
 .hidden {
