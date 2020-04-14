@@ -1,3 +1,5 @@
+@import '../../assets/_variables.scss';
+
 :host {
     position: relative;
     display: block;
@@ -15,7 +17,7 @@
 .container:focus input {
     outline: none;
     margin: 0;
-    border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+    border: var(--border-active, $border-active);
     border-right: none;
 }
 
@@ -24,39 +26,39 @@ input {
 
     padding: .6rem .4rem .6rem .4rem;
     margin: 1px;
-    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    border: var(--border, $border);
     border-right: none;
-    border-top-left-radius: var(--border-radius-input, 10px);
-    border-bottom-left-radius: var(--border-radius-input, 10px);
+    border-top-left-radius: var(--border-radius-medium, $border-radius-medium);
+    border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
     border-bottom-right-radius: 0;
 
     font: inherit;
     font-size: 1.2rem;
-    color: var(--text-color, black);
-    background-color: var(--input-background, white);
+    color: var(--primary-font-color, $primary-font-color);
+    background-color: var(--input-background, $input-background);
 
     width: 100%;
 
     &:focus {
         outline: none;
         margin: 0;
-        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+        border: var(--border-active, $border-active);
         border-right: none;
         border-bottom-left-radius: 0;
     }
 
     &[error="true"]{
         margin: 4px 0;
-        border: 2px solid var(--color-color, red);
+        border: 2px solid var(--error-border-color, $error-border-color);
 
-        background-color: var(--error-color, lightpink);
+        background-color: var(--error-light-color, $error-light-color);
     }
 }
 
 label {
     font: inherit;
     font-size: 1rem;
-    color: var(--primary-color, green);
+    color: var(--primary-color, $primary-color);
 }
 
 .combo {
@@ -72,7 +74,7 @@ label {
 .combo:focus input {
     outline: none;
     margin: 0;
-    border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+    border: $border-active;
     border-right: none;
     border-bottom-left-radius: 0;
 }
@@ -83,14 +85,14 @@ label {
     align-items: center;
     flex-basis: 2.5rem;
 
-    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
-    border-top-right-radius: var(--border-radius-input, 10px);
-    border-bottom-right-radius: var(--border-radius-input, 10px);
+    border: var(--border, $border);
+    border-top-right-radius: var(--border-radius-medium, $border-radius-medium);
+    border-bottom-right-radius: var(--border-radius-medium, $border-radius-medium);
 
     font-size: .8rem;
     
-    color: var(--primary-font-color, white);
-    background-color: var(--primary-color, green);
+    color: var(--primary-bg-font-color, $primary-bg-font-color);
+    background-color: var(--primary-color, $primary-color);
 
     cursor: pointer;
 }
@@ -100,12 +102,12 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    border-bottom-left-radius: var(--border-radius-input, 10px);
-    border-bottom-right-radius: var(--border-radius-input, 10px);
+    border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
+    border-bottom-right-radius: var(--border-radius-medium, $border-radius-medium);
 
-    color: var(--text-color, black);
-    border-color: var(--primary-color, green);
-    background-color: var(--input-background, white);
+    color: var(--primary-font-color, $primary-font-color);
+    border-color: var(--primary-color, $primary-color);
+    background-color: var(--input-background, $input-background);
 
     width: calc(100% - 2.8rem + 2px);
     max-height: 0;
@@ -128,24 +130,25 @@ li.hide  {
 }
 
 .no-items input {
-    border-bottom-left-radius: var(--border-radius-input, 10px);
+    border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
 }
 
 .combo:focus  ul,
 .combo:focus-within ul {
     max-height: 7.4rem;
     height: auto;
-    border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
-    border-top: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    border: var(--border-heavy-style, 2px solid) var(--primary-color, $primary-color);
+    border-top: var(--border, $border);
     transition: max-height .4s ease-in-out;
 }
 
 li {
     padding: 4px 10px;
-    border-top: var(--border-medium-style, 1px solid) transparent;
+    border-top: var(--border, $border);
+    border-top-color: transparent;
 }
 
 li:hover {
-    background-color: var(--input-alt-background, #C0C0C0);
-    border-color: var(--border-medium-color, #757575);
+    background-color: var(--input-background-2, $input-background-2);
+    border-color: var(--border-color, $border-color);
 }
