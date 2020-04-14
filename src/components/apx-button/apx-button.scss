@@ -6,7 +6,7 @@ button {
     background-color: var(--primary-color, $primary-color);
     
     border: var(--border, $border);
-    border-radius: var(--border-radius-button, 5px);
+    border-radius: var(--border-radius-small, $border-radius-small);
     
     padding: .4rem;
     margin: 0 .1rem;
@@ -19,15 +19,15 @@ button {
     &:hover {
         color: var(--primary-bg-font-color-hover, $primary-bg-font-color-hover);
         background-color: var(--primary-color-hover, $primary-color-hover);
-        box-shadow: var(--shadow-medium, 3px 4px 4px rgba(0, 0, 0, .5));
+        box-shadow: var(--shadow-medium, $shadow-medium);
     }
 
     &:active:hover{
-        box-shadow: var(--shadow-light, 3px 2px 2px rgba(0, 0, 0, .5));
+        box-shadow: var(--shadow-light, $shadow-light);
     }
 
     &:focus {
         outline: none;
-        box-shadow: var(--shadow-medium, 3px 4px 4px rgba(0, 0, 0, .5));
+        box-shadow: var(--shadow-medium, $shadow-medium);
     }
 }

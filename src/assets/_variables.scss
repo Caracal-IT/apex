@@ -12,8 +12,11 @@ $border: 10px solid green;
 $border-active: 2px solid var(--primary-color);
 $border-component: 2px solid #757575;
 
-$shadow-light--1: 3px 2px 2px rgba(0, 0, 0, .5);
-$shadow-medium--1: 3px 4px 4px rgba(0, 0, 0, .5);
+$border-radius-small: 25px;
+$border-radius-medium: 35px;
+
+$shadow-light: 3px 2px 2px rgba(0, 0, 255, .5);
+$shadow-medium: 3px 4px 4px rgba(255, 0, 0, .5);
 $backdrop: rgba(0, 0, 0, .5);
 
 
