@@ -76,38 +76,43 @@
         function changeToDarkTheme() {
             style.innerText = `
                 body {
+                    color: white;
                     background-color: #222;
                 }
 
                 :root {
-                        --text-color: #DDD;
-                        --input-background: #444;
+                    --input-background: #555;
+                    --input-background-2: #888;
+                    --input-background-3: #555;
+                    --input-background-4: #DDD;
 
-                        --text-alt-color: #000;
-                        --input-alt-background: #AAA;
-
-                        --border-light-color: #444;
-
-                        --border-medium-style: 1px solid;
-                        --border-medium-color: #BBB;
-
-                        --border-heavy-style: 2px solid;
-
-                        --border-radius-button: 5px;
-                        --border-radius-input: 10px;
-
-                        --primary-color: hotpink;
-                        --primary-font-color: #111;   
-
-                        --primary-light-color: pink;
-                        --primary-light-font-color: #444;
-
-                        --error-color: red;
-                        --error-light-color: lightpink;
-
-                        --shadow-light: 3px 2px 2px rgba(0, 0, 0, 1);
-                        --shadow-medium: 3px 4px 5px rgba(255, 105, 180, 0.6);
-                };`;
+                    --primary-color: hotpink;
+                    --primary-bg-font-color: #f5f5f5;
+                    --primary-font-color: whitesmoke;
+                    --primary-disabled-color: #888;
+                    --primary-font-disabled-color: whitesmoke;
+                    --primary-color-hover: pink;
+                    --primary-bg-font-color-hover: #292929;
+                    
+                    --border-color: #C0C0C0;
+                    --border: 1px solid #C0C0C0;
+                    --border-active: 2px solid hotpink;
+                    --border-in-active: 2px solid #989898;
+                    --border-component: 2px solid #686868;
+                    
+                    --border-radius-small: 5px;
+                    --border-radius-medium: 10px;
+                    --border-radius-large: 15px;
+                    
+                    --shadow-light: 3px 2px 2px rgba(255, 255, 255, 0);
+                    --shadow-medium: 3px 4px 4px rgba(255, 255, 255, 0);
+                    
+                    --backdrop: rgba(255, 255, 255, 0.5);
+                    
+                    --error-color: red;
+                    --error-border-color: red;
+                    --error-light-color: #ffb6c1
+                }`;
         }
     </script>
 </body>

@@ -133,7 +133,7 @@ input {
     padding: .6rem .4rem .6rem .4rem;
     border: var(--border $border);
     border-radius: var(--border-radius-large, $border-radius-large);
-    color: var(--text-color, black);
+    color: var(--primary-font-color, $primary-font-color);
     background-color: var(--input-background-3, $input-background-3);
 
     &:focus {

@@ -21,7 +21,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--input-background-3, $input-background-3);
+    background-color: var(--input-background-4, $input-background-4);
+    //border: var(--border, $border);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -29,12 +30,12 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 15px;
+    height: 14px;
     width: 15px;
     left: 2px;
     bottom: 3px;
     background-color: var(--input-background, $input-background);
-    border: $border;
+    border: var(--border, $border);
     -webkit-transition: .4s;
     transition: .4s;
   }

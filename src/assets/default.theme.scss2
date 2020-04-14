@@ -1,22 +1,35 @@
 @import 'variables';
 
-:root2 {
-    --font-color: black;
-    --primary-color: green;
+:root {
+    input-background: $input-background;
+    input-background-2: $input-background-2;
+    input-background-3: $input-background-3;
 
-    --margin: 5px;
-    --margin--active: 5px;
+    primary-color: $primary-color;
+    primary-bg-font-color: $primary-bg-font-color;
+    primary-font-color: $primary-font-color;
+    primary-disabled-color: $primary-disabled-color;
+    primary-font-disabled-color: $primary-font-disabled-color;
 
-    --border: 1px solid #757575;
-    --border-active: 2px solid var(--primary-color);
-    --border-component: 2px solid #757575;
-    
-    --shadow-light--1: 3px 2px 2px rgba(0, 0, 0, .5);
-    --shadow-medium--1: 3px 4px 4px rgba(0, 0, 0, .5);
-    --backdrop: rgba(0, 0, 0, .5);
+    primary-color-hover: $primary-color-hover;
+    primary-bg-font-color-hover: $primary-bg-font-color-hover;
+
+    border-color: border-color;
+    border: $border;
+    border-active: $border-active;
+    border-in-active: $border-in-active;
+    border-component: $border-component;
+
+    border-radius-small: $border-radius-small;
+    border-radius-medium: $border-radius-medium;
+    border-radius-large: $border-radius-large;
+
+    shadow-light: $shadow-light;
+    shadow-medium: $shadow-medium;
+    backdrop: $backdrop;
 
 
-    --error-color: red;
-    --error-border-color: red;
-    --error-light-color: lightpink;
+    error-color: $error-color;
+    error-border-color: $error-border-color;
+    error-light-color: $error-light-color;
 }
