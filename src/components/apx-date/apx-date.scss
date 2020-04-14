@@ -149,12 +149,12 @@ input {
 }
 
 .disable {
-    color: var(--primary-font-disabled-color, $primary-font-disabled-color);
+    color: var(--primary-disabled-color, $primary-disabled-color);
 }
 
 .today {
-    color: var(--primary-font-color, $primary-font-color);
-    background-color: var(--primary-font-disabled-color, $primary-font-disabled-color);
+    color: var(--primary-font-disabled-color, $primary-font-disabled-color);
+    background-color: var(--primary-disabled-color, $primary-disabled-color);
 }
 
 .selected {

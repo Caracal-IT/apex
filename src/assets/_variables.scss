@@ -1,27 +1,28 @@
-$input-background: rgb(224, 17, 197);
-$input-background-2: rgb(161, 113, 113);
-$input-background-3: rgb(224, 240, 4);
+$input-background: white;
+$input-background-2: #C0C0C0;
+$input-background-3: #B7B7B7;
 
-$primary-color: blue;
-$primary-bg-font-color: yellow;
-$primary-font-color: indigo;
-$primary-font-disabled-color: rgb(47, 214, 226);
+$primary-color: green;
+$primary-bg-font-color: whitesmoke;
+$primary-font-color: black;
+$primary-disabled-color: #888;
+$primary-font-disabled-color: white;
 
 $primary-color-hover: lighten($primary-color, 20%);
 $primary-bg-font-color-hover: darken($primary-bg-font-color, 80%);
 
-$border-color: green;
-$border: 10px solid $border-color;
+$border-color: #686868;
+$border: 1px solid $border-color;
 $border-active: 2px solid $primary-color;
 $border-in-active: 2px solid $border-color;
 $border-component: 2px solid $border-color;
 
-$border-radius-small: 25px;
-$border-radius-medium: 35px;
-$border-radius-large: 45px;
+$border-radius-small: 5px;
+$border-radius-medium: 10px;
+$border-radius-large: 15px;
 
-$shadow-light: 3px 2px 2px rgba(0, 0, 255, .5);
-$shadow-medium: 3px 4px 4px rgba(255, 0, 0, .5);
+$shadow-light: 3px 2px 2px rgba(0, 0, 0, .5);
+$shadow-medium: 3px 4px 4px rgba(0, 0, 0, .5);
 $backdrop: rgba(0, 0, 0, .5);
 
 
