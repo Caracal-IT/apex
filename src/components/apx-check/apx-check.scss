@@ -1,3 +1,5 @@
+@import '../../assets/_variables.scss'; 
+
 label {
 	display: inline;
 }
@@ -7,8 +9,8 @@ input {
 }
 
 input + label {
-	background-color: var(--input-background, white);
-	border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+	background-color: var(--input-background, $input-background);
+	border: var(--border, $border);
 	padding: 9px;
 	border-radius: 3px;
 	display: inline-block;
@@ -21,14 +23,14 @@ input:checked + label:after {
 	position: absolute;
 	top: 0px;
 	left: 3px;
-	color: var(--primary-color, green);
+	color: var(--primary-color, $primary-color);
 }
 
 label:last-of-type {
     position: relative;
     display: inline-block;
     margin: 0 5px;
-    color: var(--text-color, black);
+    color: var(--primary-font-color, $primary-font-color);
     vertical-align: top;
     top: 2px;
 }

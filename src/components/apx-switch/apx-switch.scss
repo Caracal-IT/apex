@@ -1,3 +1,5 @@
+@import '../../assets/_variables.scss';
+
 .switch {
     position: relative;
     display: inline-block;
@@ -19,7 +21,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var( --input-alt-background, #C0C0C0);
+    background-color: var(--input-background, $input-background);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -31,18 +33,18 @@
     width: 15px;
     left: 2px;
     bottom: 3px;
-    background-color: var(--primary-font-color, white);
-    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    background-color: var(--input-background-2, $input-background-2);
+    border: $border;
     -webkit-transition: .4s;
     transition: .4s;
   }
   
   input:checked + .slider {
-    background-color: var(--primary-color, green);
+    background-color: var(--primary-color, $primary-color);
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px var(--primary-color, green);
+    box-shadow: 0 0 1px var(--primary-color, $primary-color);
   }
   
   input:checked + .slider:before {
@@ -64,7 +66,7 @@ label:last-of-type {
     position: relative;
     display: inline-block;
     margin: 0 5px;
-    color: var(--text-color, black);
+    color: var(--primary-font-color, $primary-font-color);
     vertical-align: top;
     top: 2px;
 }

@@ -1,3 +1,5 @@
+@import '../../assets/_variables.scss';
+
 :host {
     display: block;
 }
@@ -7,32 +9,32 @@ input {
 
     margin: 5px 1px;
     padding: .6rem .4rem .6rem .4rem;
-    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
-    border-radius: var(--border-radius-input, 10px);;
+    border: var(--border, $border);
+    border-radius: var(--border-radius-medium, $border-radius-medium);;
 
     font: inherit;
     font-size: 1.2rem;
-    color: var(--text-color, black);
-    background-color: var(--input-background, white);
+    color: var(--primary-font-color, $primary-font-color);
+    background-color: var(--input-background, $input-background);
 
     width: calc(100% - 1rem);
 
     &:focus {
         outline: none;
         margin: 4px 0;
-        border: var(--border-heavy-style, 2px solid) var(--primary-color, green);
+        border: var(--border-active, $border-active);
     }
 
     &[error="true"]{
         margin: 4px 0;
-        border: 2px solid var(--color-color, red);
+        border: 2px solid var(--error-border-color, $error-border-color);
 
-        background-color: var(--error-color, lightpink);
+        background-color: var(--error-light-color, $error-light-color);
     }
 }
 
 label {
     font: inherit;
     font-size: 1rem;
-    color: var(--primary-color, green);
+    color: var(--primary-color, $primary-color);
 }

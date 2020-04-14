@@ -1,12 +1,15 @@
+@import '../../assets/_variables.scss';
+
 input {
 	display: none;
 }
 
 input + label {
 	-webkit-appearance: none;
-	border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+	border: var(--border, $border);
 	padding: 9px;
 	border-radius: 50px;
+	background: var(--input-background, $input-background);
 	display: inline-block;
 	position: relative;
 }
@@ -18,8 +21,7 @@ input:checked + label:after {
 	border-radius: 50px;
 	position: absolute;
 	top: 3px;
-	background: var(--primary-color, green);
-	box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+	background: var(--primary-color, $primary-color);
 	text-shadow: 0px;
 	left: 3px;
 	font-size: 32px;
@@ -29,7 +31,7 @@ input:checked + label:after {
     position: relative;
     display: inline-block;
     margin: 0 5px;
-    color: var(--text-color, black);
+    color: var(--primary-font-color, $primary-font-color);
     vertical-align: top;
     top: 2px;
 }

@@ -1,3 +1,6 @@
+$input-background: rgb(224, 17, 197);
+$input-background-2: rgb(161, 113, 113);
+
 $primary-color: blue;
 $primary-bg-font-color: yellow;
 $primary-font-color: indigo;
@@ -9,7 +12,7 @@ $margin: 5px;
 $margin--active: 5px;
 
 $border: 10px solid green;
-$border-active: 2px solid var(--primary-color);
+$border-active: 2px solid $primary-color;
 $border-component: 2px solid #757575;
 
 $border-radius-small: 25px;
