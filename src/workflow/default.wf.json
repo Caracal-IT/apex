@@ -6,6 +6,7 @@
             "type": "page-activity",            
             "controls": [
                 {"tag" : "apx-header", "caption": "Apex Controls" },
+                {"tag" : "apx-label", "caption": "Apex Label" },
                 {"tag": "apx-input", "id": "demo.textbox", "caption": "Text Box"},
                 {"tag": "apx-check", "id": "demo.checkbox", "caption": "Check"},
                 {"tag": "apx-switch", "id": "demo.switch", "caption": "Switch"},

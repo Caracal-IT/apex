@@ -2,15 +2,24 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 module.exports = {
   entry: {
+    theme: './src/index.ts',
     components: './src/components/index.ts'
   },
   plugins: [    
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({     
-      template: './src/index.html'
+      template: './src/index.html',
+      title: 'OApex Workflow Components'
+    }),
+    new ExtractCssChunks({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
     new CopyWebpackPlugin([
       {
@@ -74,13 +83,21 @@ module.exports = {
             ],
         },
         {
+          test: /\.theme\.scss2$/,
+          use: [              
+            ExtractCssChunks.loader,
+            'css-loader',
+            'sass-loader',
+          ],
+        },
+        {
           test: /\.scss$/,
           use: [
               'to-string-loader',
               'css-loader',
               'sass-loader',
           ],
-      },
+        },
         {
             test: /\.(png|svg|jpg|gif)$/,
             use: [

@@ -1,0 +1,21 @@
+@import 'variables';
+
+:root2 {
+    --font-color: black;
+
+    --margin: 5px;
+    --margin--active: 5px;
+
+    --border: 1px solid #757575;
+    --border-active: 2px solid var(--primary-color);
+    --border-component: 2px solid #757575;
+    
+    --shadow-light--1: 3px 2px 2px rgba(0, 0, 0, .5);
+    --shadow-medium--1: 3px 4px 4px rgba(0, 0, 0, .5);
+    --backdrop: rgba(0, 0, 0, .5);
+
+
+    --error-color: red;
+    --error-border-color: red;
+    --error-light-color: lightpink;
+}
