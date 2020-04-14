@@ -1,9 +1,11 @@
+@import '../../assets/_variables.scss';
+
 button {
     cursor: pointer;
-    color: var(--primary-font-color, white);
-    background-color: var(--primary-color, green);
+    color: var(--primary-bg-font-color, $primary-bg-font-color);
+    background-color: var(--primary-color, $primary-color);
     
-    border: var(--border-medium-style, 1px solid) var(--border-medium-color, #757575);
+    border: var(--border, $border);
     border-radius: var(--border-radius-button, 5px);
     
     padding: .4rem;
@@ -15,8 +17,8 @@ button {
     min-width: 9rem;
 
     &:hover {
-        color: var(--primary-light-font-color, black);
-        background-color: var(--primary-light-color, lime);
+        color: var(--primary-bg-font-color-hover, $primary-bg-font-color-hover);
+        background-color: var(--primary-color-hover, $primary-color-hover);
         box-shadow: var(--shadow-medium, 3px 4px 4px rgba(0, 0, 0, .5));
     }
 

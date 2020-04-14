@@ -2,6 +2,7 @@
 
 :root2 {
     --font-color: black;
+    --primary-color: green;
 
     --margin: 5px;
     --margin--active: 5px;

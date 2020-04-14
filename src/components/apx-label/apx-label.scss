@@ -1,5 +1,5 @@
 @import '../../assets/_variables.scss';
 
 :host {
-    color: var(--font-color, $font-color);
+    color: var(--primary-font-color, $primary-font-color);
 }
