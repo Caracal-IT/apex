@@ -1,6 +1,6 @@
 @import 'variables';
 
-:root {
+:root1 {
     input-background: $input-background;
     input-background-2: $input-background-2;
     input-background-3: $input-background-3;
