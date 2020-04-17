@@ -1,9 +1,10 @@
 @import 'variables';
 
-:root1 {
+root1 {
     input-background: $input-background;
     input-background-2: $input-background-2;
     input-background-3: $input-background-3;
+    input-background-4: $input-background-4;
 
     primary-color: $primary-color;
     primary-bg-font-color: $primary-bg-font-color;

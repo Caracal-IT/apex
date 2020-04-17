@@ -46,6 +46,11 @@ module.exports = {
       context: 'src/data',
       from: '**/*.json',
       to: 'data'
+    },
+    {
+      context: 'src/assets',
+      from: '**/*.css',
+      to: 'css'
     }
     ]),
   ], 
