@@ -1,6 +1,7 @@
 body {
     color: var(--primary-font-color, black);
     background-color: var(--background, white);
+    user-select: none;
 }
 
 #theme {
@@ -31,4 +32,18 @@ polaris-workflow {
     padding: 10px;
     
     max-width: 600px;
+}
+
+[wf-error=error]:empty {
+    height: 0;
+    opacity: 0;
+}
+
+[wf-error=error] {
+    display: block;
+    opacity: 1;
+    height: 20px;
+    color: var(--error-color, red);
+    margin-bottom: 5px;
+    transition: height .3s ease-in-out, opacity 1s ease-in;
 }
