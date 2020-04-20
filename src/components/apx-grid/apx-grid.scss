@@ -29,7 +29,7 @@ table, th, td {
 th {
     position: sticky;
     border-color: var(--primary-bg-font-color, $primary-bg-font-color);
-   
+    border-top: transparent;
     color: var(--primary-bg-font-color, $primary-bg-font-color);
     background-color: var(--primary-color, $primary-color);
     top: 0;
