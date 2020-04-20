@@ -95,6 +95,11 @@ label {
     background-color: var(--primary-color, $primary-color);
 
     cursor: pointer;
+
+    &:hover {
+        color: var(--primary-bg-font-color-hover, $primary-bg-font-color-hover);
+        background-color: var(--primary-color-hover, $primary-color-hover);
+   }
 }
 
 ul {

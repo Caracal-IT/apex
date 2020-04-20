@@ -64,6 +64,11 @@
 
    top: 0;
    right: 0;
+
+   &:hover {
+        color: var(--primary-bg-font-color-hover, $primary-bg-font-color-hover);
+        background-color: var(--primary-color-hover, $primary-color-hover);
+   }
 }
 
 .popup {
