@@ -29,7 +29,7 @@ input:checked + label:after {
 label:last-of-type {
     position: relative;
     display: inline-block;
-    margin: 0 5px;
+    margin: 0;
     color: var(--primary-font-color, $primary-font-color);
     vertical-align: top;
     top: 2px;

@@ -3,14 +3,14 @@ $input-background-2: #C0C0C0;
 $input-background-3: #B7B7B7;
 $input-background-4: #888;
 
-$primary-color: green;
+$primary-color: purple;
 $primary-bg-font-color: whitesmoke;
 $primary-font-color: black;
 $primary-disabled-color: #888;
 $primary-font-disabled-color: white;
 
 $primary-color-hover: lighten($primary-color, 20%);
-$primary-bg-font-color-hover: darken($primary-bg-font-color, 80%);
+$primary-bg-font-color-hover: lighten($primary-bg-font-color, 80%);
 
 $border-color: #686868;
 $border: 1px solid $border-color;

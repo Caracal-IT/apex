@@ -94,8 +94,6 @@ export class Grid extends HTMLElement {
         const body = document.createElement('tbody');
         this._table.appendChild(body);
 
-        //console.dir(Object.keys(this._items[0]).map(s => s.replace(/([A-Z])/g, ' $1').trim()));
-
         this._items.forEach(i => this.createRow(i, body));
     }
 
