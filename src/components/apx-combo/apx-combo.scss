@@ -23,7 +23,6 @@
 
 input {
     display: block;
-
     padding: .6rem .4rem .6rem .4rem;
     margin: 1px;
     border: var(--border, $border);
@@ -31,13 +30,13 @@ input {
     border-top-left-radius: var(--border-radius-medium, $border-radius-medium);
     border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
     border-bottom-right-radius: 0;
+    
+    flex-basis: calc(100% - 55px);
 
     font: inherit;
     font-size: 1.2rem;
     color: var(--primary-font-color, $primary-font-color);
     background-color: var(--input-background, $input-background);
-
-    width: 100%;
 
     &:focus {
         outline: none;
@@ -63,7 +62,9 @@ label {
 
 .combo {
     display: flex;
+    flex-wrap: wrap;
     align-items: stretch;
+    justify-content: flex-start;
     margin: 5px 1px;
 }
 
@@ -83,7 +84,8 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-basis: 2.5rem;
+    flex-wrap: wrap;
+    flex-basis: 37px;
 
     border: var(--border, $border);
     border-top-right-radius: var(--border-radius-medium, $border-radius-medium);
@@ -102,6 +104,12 @@ label {
    }
 }
 
+.items-container {
+    justify-self: start;
+    flex-grow: 1;
+    min-width: 100%;
+}
+
 ul {
     position: absolute;
     list-style: none;
@@ -114,10 +122,9 @@ ul {
     border-color: var(--primary-color, $primary-color);
     background-color: var(--input-background, $input-background);
 
-    width: calc(100% - 2.8rem + 2px);
+    width: calc(100% - 48px);
     max-height: 0;
     height: 0;
-    top: 4.1rem;
     overflow-y: auto;
     
     transition: max-height .4s ease-in-out;
