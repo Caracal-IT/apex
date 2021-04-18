@@ -8,6 +8,7 @@ export class Combo extends HTMLElement {
     private _input: HTMLInputElement;
     private _icon: HTMLDivElement;
     private _itemContainer: HTMLUListElement;
+    private _itemWWrapperContainer: HTMLDivElement;
     private _isOpen = false;
     private _value = '';
 
@@ -16,6 +17,8 @@ export class Combo extends HTMLElement {
     private _iconClickHandler: EventListener;
     private _comboClickHandler: EventListener;
     private _blurHandler: EventListener;
+    private _isInit = false;
+
 
     caption: string;
     ctx:Context;
@@ -45,6 +48,7 @@ export class Combo extends HTMLElement {
     constructor(){
         super();
 
+        this._isInit = false; 
         this.attachShadow({mode: 'open'});
         this.shadowRoot.innerHTML = `<style>${css}</style>`;
 
@@ -72,6 +76,8 @@ export class Combo extends HTMLElement {
         this._input.addEventListener('input', this._inputHandler);
 
         this._combo.addEventListener('mouseleave', this._blurHandler);
+        this._isInit = true;
+        console.dir(this._isInit);
     }
 
     disconnectedCallback() {
@@ -96,7 +102,7 @@ export class Combo extends HTMLElement {
     }
 
     private displayHideItem(text: string, item: HTMLUListElement) {
-        if(item.textContent.toLowerCase().indexOf(text) > -1)
+        if(!this._isInit || item.textContent.toLowerCase().indexOf(text) > -1)
             item.classList.remove("hide");
         else
             item.classList.add("hide");
@@ -180,8 +186,12 @@ export class Combo extends HTMLElement {
     }
 
     private createLookupItems() {
+        this._itemWWrapperContainer = document.createElement('div');
+        this._itemWWrapperContainer.className = "items-container";
+
         this._itemContainer = document.createElement('ul');
-        this._combo.appendChild(this._itemContainer);
+        this._combo.appendChild(this._itemWWrapperContainer);
+        this._itemWWrapperContainer.appendChild(this._itemContainer)
 
         this._itemContainer.addEventListener('click', (e: any) => {
             this.value = e.target.textContent;//e.target.dataset.value;

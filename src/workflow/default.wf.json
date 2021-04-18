@@ -30,6 +30,7 @@
                     "tag": "apx-combo", 
                     "id": "demo.comboBox",
                     "caption": "Combo",
+                    "value": "combo1",
                     "items": [
                         {"caption": "Combo 1", "value": "combo1"},
                         {"caption": "Combo 2", "value": "combo2"},
