@@ -23,27 +23,26 @@
 
 input {
     display: block;
+
     padding: .6rem .4rem .6rem .4rem;
     margin: 1px;
     border: var(--border, $border);
     border-right: none;
     border-top-left-radius: var(--border-radius-medium, $border-radius-medium);
     border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
-    border-bottom-right-radius: 0;
-    
-    flex-basis: calc(100% - 55px);
 
     font: inherit;
     font-size: 1.2rem;
     color: var(--primary-font-color, $primary-font-color);
     background-color: var(--input-background, $input-background);
 
+    width: 100%;
+
     &:focus {
         outline: none;
         margin: 0;
         border: var(--border-active, $border-active);
         border-right: none;
-        border-bottom-left-radius: 0;
     }
 
     &[error="true"]{
@@ -61,10 +60,9 @@ label {
 }
 
 .combo {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
     align-items: stretch;
-    justify-content: flex-start;
     margin: 5px 1px;
 }
 
@@ -77,15 +75,13 @@ label {
     margin: 0;
     border: $border-active;
     border-right: none;
-    border-bottom-left-radius: 0;
 }
 
 .arrow {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    flex-basis: 37px;
+    flex-basis: 2.5rem;
 
     border: var(--border, $border);
     border-top-right-radius: var(--border-radius-medium, $border-radius-medium);
@@ -104,35 +100,22 @@ label {
    }
 }
 
-.items-container {
-    justify-self: start;
-    flex-grow: 1;
-    min-width: 100%;
-}
-
 ul {
-    position: absolute;
+    position: absolute;    
+    display: none;
     list-style: none;
     padding: 0;
+    padding-bottom: 5px;
     margin: 0;
-    border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
-    border-bottom-right-radius: var(--border-radius-medium, $border-radius-medium);
-
+    left:0;
     color: var(--primary-font-color, $primary-font-color);
     border-color: var(--primary-color, $primary-color);
     background-color: var(--input-background, $input-background);
-
-    width: calc(100% - 48px);
     max-height: 0;
     height: 0;
-    overflow-y: auto;
-    
-    transition: max-height .4s ease-in-out;
-    z-index: 999;
-}
-
-li.hide  {
-   display: none;
+    width: calc(100% - 2.5rem - 3px);
+    overflow-y: auto;    
+    transition: max-height, height .4s ease-in-out;    
 }
 
 .no-items ul {
@@ -141,13 +124,39 @@ li.hide  {
     border: none!important;
 }
 
-.no-items input {
-    border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
+
+.is-down {
+    .combo:focus,
+    .combo:focus-within {
+        ul {
+            border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
+            border-bottom-right-radius: var(--border-radius-medium, $border-radius-medium);
+        }
+
+        input {
+            border-bottom-left-radius: 0;
+        }
+    }
+}
+
+.is-up {
+    .combo:focus,
+    .combo:focus-within {
+        ul {
+            border-top-left-radius: var(--border-radius-medium, $border-radius-medium);
+            border-top-right-radius: var(--border-radius-medium, $border-radius-medium);
+        }
+
+        input {
+            border-top-left-radius: 0;
+        }
+    }
 }
 
 .combo:focus  ul,
 .combo:focus-within ul {
-    max-height: 7.4rem;
+    display: block;
+    max-height: 100px;
     height: auto;
     border: var(--border-heavy-style, 2px solid) var(--primary-color, $primary-color);
     border-top: var(--border, $border);

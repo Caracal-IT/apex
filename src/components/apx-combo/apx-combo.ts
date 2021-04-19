@@ -8,7 +8,6 @@ export class Combo extends HTMLElement {
     private _input: HTMLInputElement;
     private _icon: HTMLDivElement;
     private _itemContainer: HTMLUListElement;
-    private _itemWWrapperContainer: HTMLDivElement;
     private _isOpen = false;
     private _value = '';
 
@@ -77,7 +76,6 @@ export class Combo extends HTMLElement {
 
         this._combo.addEventListener('mouseleave', this._blurHandler);
         this._isInit = true;
-        console.dir(this._isInit);
     }
 
     disconnectedCallback() {
@@ -129,6 +127,15 @@ export class Combo extends HTMLElement {
 
     private inputFocusHandler() {
         this._isOpen = true;
+        const size = this._itemContainer.parentElement.getBoundingClientRect();
+        const isDown = size.bottom < (window.innerHeight - 110);
+
+        this._container.className = isDown ? "container is-down" : "container is-up"; 
+
+        if(isDown)
+            this._itemContainer.style.top = `${this._combo.clientHeight}px`
+        else
+            this._itemContainer.style.top = `${this._combo.clientHeight - 150}px`
     }
 
     private blurHandler() {
@@ -164,7 +171,7 @@ export class Combo extends HTMLElement {
         this.createLookupItems();
     }
 
-    private createComboContainer(){
+    private createComboContainer(){         
         this._combo = document.createElement('div');
         this._combo.className = 'combo';
         this._combo.tabIndex = 0;
@@ -186,15 +193,14 @@ export class Combo extends HTMLElement {
     }
 
     private createLookupItems() {
-        this._itemWWrapperContainer = document.createElement('div');
-        this._itemWWrapperContainer.className = "items-container";
-
         this._itemContainer = document.createElement('ul');
-        this._combo.appendChild(this._itemWWrapperContainer);
-        this._itemWWrapperContainer.appendChild(this._itemContainer)
+        this._combo.appendChild(this._itemContainer);
 
+        setTimeout(() => this._itemContainer.style.top = `${this._combo.clientHeight}px`, 0);
+        
         this._itemContainer.addEventListener('click', (e: any) => {
-            this.value = e.target.textContent;//e.target.dataset.value;
+            console.dir(e);
+            this.value = e.target.textContent;            
             this.dispatchEvent(new Event('input'));
             this._container.focus();
             this._isOpen = false;
