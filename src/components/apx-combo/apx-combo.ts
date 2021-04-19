@@ -131,11 +131,15 @@ export class Combo extends HTMLElement {
         const isDown = size.bottom < (window.innerHeight - 110);
 
         this._container.className = isDown ? "container is-down" : "container is-up"; 
-
-        if(isDown)
-            this._itemContainer.style.top = `${this._combo.clientHeight}px`
-        else
-            this._itemContainer.style.top = `${this._combo.clientHeight - 152}px`
+        
+        if(isDown) {
+            this._itemContainer.style.top = `${this._combo.clientHeight}px`;
+            this._itemContainer.scrollTo(0,0);
+        }
+        else {
+            this._itemContainer.style.top = `${this._combo.clientHeight - 152}px`;
+            this._itemContainer.scrollTo(0, this._itemContainer.scrollHeight);
+        }
     }
 
     private blurHandler() {
