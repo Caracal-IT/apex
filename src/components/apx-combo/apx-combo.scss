@@ -115,7 +115,8 @@ ul {
     height: 0;
     width: calc(100% - 2.5rem - 3px);
     overflow-y: auto;    
-    transition: max-height, height .4s ease-in-out;    
+    transition: max-height, height .4s ease-in-out; 
+    z-index: 999999999999999;   
 }
 
 .no-items ul {

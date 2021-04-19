@@ -199,7 +199,6 @@ export class Combo extends HTMLElement {
         setTimeout(() => this._itemContainer.style.top = `${this._combo.clientHeight}px`, 0);
         
         this._itemContainer.addEventListener('click', (e: any) => {
-            console.dir(e);
             this.value = e.target.textContent;            
             this.dispatchEvent(new Event('input'));
             this._container.focus();
