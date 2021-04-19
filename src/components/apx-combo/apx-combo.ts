@@ -135,7 +135,7 @@ export class Combo extends HTMLElement {
         if(isDown)
             this._itemContainer.style.top = `${this._combo.clientHeight}px`
         else
-            this._itemContainer.style.top = `${this._combo.clientHeight - 150}px`
+            this._itemContainer.style.top = `${this._combo.clientHeight - 152}px`
     }
 
     private blurHandler() {

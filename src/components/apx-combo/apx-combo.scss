@@ -130,11 +130,14 @@ ul {
     .combo:focus,
     .combo:focus-within {
         ul {
+            border-top: var(--border, $border);
             border-bottom-left-radius: var(--border-radius-medium, $border-radius-medium);
             border-bottom-right-radius: var(--border-radius-medium, $border-radius-medium);
         }
 
         input {
+            border-bottom: var(--border, $border) 2px;
+            margin-bottom: 2px;
             border-bottom-left-radius: 0;
         }
     }
@@ -144,11 +147,14 @@ ul {
     .combo:focus,
     .combo:focus-within {
         ul {
+            border-bottom: var(--border, $border);
             border-top-left-radius: var(--border-radius-medium, $border-radius-medium);
             border-top-right-radius: var(--border-radius-medium, $border-radius-medium);
         }
 
         input {
+            border-top: var(--border, $border);
+            margin-top: 1px;
             border-top-left-radius: 0;
         }
     }
@@ -160,7 +166,6 @@ ul {
     max-height: 100px;
     height: auto;
     border: var(--border-heavy-style, 2px solid) var(--primary-color, $primary-color);
-    border-top: var(--border, $border);
     transition: max-height .4s ease-in-out;
 }
 
