@@ -51,6 +51,7 @@
                 {
                     "tag": "apx-grid", 
                     "caption": "Users",
+                    "selectable": true,
                     "items": "[DATA]/users",
                     "columns": [
                         {"caption": "Id", "name": "id"}, 

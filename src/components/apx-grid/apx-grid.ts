@@ -1,6 +1,5 @@
 import css from './apx-grid.scss';
 import { Context } from 'caracal_polaris/dist/types/model/context.model';
-
 export class Grid extends HTMLElement {
     private _table: HTMLTableElement;
     private _content: HTMLDivElement;
@@ -8,6 +7,7 @@ export class Grid extends HTMLElement {
     private _items = [];
    
     caption: string;
+    selectable: boolean;
     columns: Array<Column>;
     items: []|string;
     height: string;
@@ -68,6 +68,11 @@ export class Grid extends HTMLElement {
         
         const row = document.createElement('tr');
         header.appendChild(row);
+
+        if(this.selectable) {
+            const col = document.createElement('th');
+            row.appendChild(col);
+        }
 
         this.columns.forEach(c => this.createColumn(c, row));  
     }
@@ -133,14 +138,39 @@ export class Grid extends HTMLElement {
     private createRow(item: any, body: HTMLTableSectionElement) {
         const row = document.createElement('tr');
         body.appendChild(row);
+        
+        this.createSelectCell(item, row);
 
         this.columns.forEach(c => this.createCell(item[c.name], row)); 
     }
 
-    private createCell(text: string, row: HTMLTableRowElement) {
+    private createSelectCell(item, row: HTMLTableRowElement) {
+        if(!this.selectable) return;
+
+        const ckb: any = document.createElement('apx-check');
+        ckb.ctx = this.ctx;
+        ckb.id = item.id;
+
+        row.onclick = (e) => this.selectRow(e, ckb, row, item);
+        
+        const cell = this.createCell('', row);
+        cell.className = 'select-item';
+        cell.appendChild(ckb);
+    }
+
+    private selectRow(e: Event, ckb, row, item) {
+        ckb.value = !ckb.value;
+        row.className = ckb.value ? 'selected': '';
+        item.selected = ckb.value;
+        e.preventDefault();
+    }
+
+    private createCell(text: string, row: HTMLTableRowElement): HTMLTableCellElement {
         const cell = document.createElement('td');
         row.appendChild(cell);
         cell.textContent = text;
+
+        return cell;
     }
 
     private async initItems() {

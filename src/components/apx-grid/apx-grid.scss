@@ -24,8 +24,14 @@
 
             &:nth-child(even){background-color: var(--input-background-2, $input-background-2);}
 
+            &.selected {
+                background-color: var(--primary-color-selected, $primary-color-selected);
+            }
+            
+            &.selected:nth-child(even){background-color: var(--primary-color-selected-alt, $primary-color-selected-alt);}
+            
             &:hover,
-            .selected:nth-child(even):hover
+            &.selected:nth-child(even):hover
             {
                 background-color: var(--primary-color-hover, $primary-color-hover);
                 color: var(--primary-bg-font-color-hover, $primary-bg-font-color-hover);
@@ -52,29 +58,11 @@
                 }
             }
 
-            //td {
-            //    &:first-of-type {
-            //        width: 25px;
-            //    }
-            //}
+            td {
+                &.select-item {
+                    width: 25px;
+                }
+            }
         }
     }
-}
-
-
-
-/*
-.selected {
-    background-color: var(--primary-color-selected, $primary-color-selected);
-}
-
-.selected:nth-child(even){background-color: var(--primary-color-selected-alt, $primary-color-selected-alt);}
-*/
-
-table tr:hover,
-.selected:nth-child(even):hover
-{
-  background-color: var(--primary-color-hover, $primary-color-hover);
-  color: var(--primary-bg-font-color-hover, $primary-bg-font-color-hover);
-  cursor: pointer;
 }
