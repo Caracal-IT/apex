@@ -50,6 +50,7 @@
                 {"tag": "hr" },
                 {
                     "tag": "apx-grid", 
+                    "caption": "Users",
                     "items": "[DATA]/users",
                     "columns": [
                         {"caption": "Id", "name": "id"}, 

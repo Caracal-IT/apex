@@ -6,57 +6,75 @@
 
 :host {
     display: block;
-    max-height: 10rem;
-    border: var(--border-in-active, $border-in-active);
-    overflow-y: auto;
+    margin-top: 10px;
+    padding: 0;
 }
 
-table {
-    position: relative;
-    border-collapse: collapse;
+.content {
+    border-radius: 5px;
+    border: 1px solid var(--border-color, $border-color);
 
-    color:var(--primary-font-color, $primary-font-color);
-    background-color:var(--input-background, $input-background);
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0;
 
-    width:100%;
+        tr {
+            border-bottom: 1px solid var(--border-color, $border-color);
+
+            &:nth-child(even){background-color: var(--input-background-2, $input-background-2);}
+
+            &:hover,
+            .selected:nth-child(even):hover
+            {
+                background-color: var(--primary-color-hover, $primary-color-hover);
+                color: var(--primary-bg-font-color-hover, $primary-bg-font-color-hover);
+                cursor: pointer;
+            }
+
+            td, th {
+                position: relative;
+                border-left: 1px solid var(--border-color, $border-color);
+                border-right: 1px solid var(--border-color, $border-color);
+                padding: 8px;
+            }
+
+            th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: var(--primary-color, $primary-color);
+                color: var(--primary-bg-font-color, $primary-bg-font-color);
+                text-transform: capitalize;
+
+                span {
+                    position: absolute;
+                }
+            }
+
+            //td {
+            //    &:first-of-type {
+            //        width: 25px;
+            //    }
+            //}
+        }
+    }
 }
 
-table, th, td {
-    border: var(--border, $border);
-    text-align: center;
+
+
+/*
+.selected {
+    background-color: var(--primary-color-selected, $primary-color-selected);
 }
 
-th {
-    position: sticky;
-    border-color: var(--primary-bg-font-color, $primary-bg-font-color);
-    border-top: transparent;
-    color: var(--primary-bg-font-color, $primary-bg-font-color);
-    background-color: var(--primary-color, $primary-color);
-    top: 0;
-}
+.selected:nth-child(even){background-color: var(--primary-color-selected-alt, $primary-color-selected-alt);}
+*/
 
-td:first-of-type, 
-th:first-of-type {
-    border-left: none;
-}
-
-table, 
-tr,
-th:last-of-type,
-td:last-of-type  {
-    border-right: none;
-}
-
-th:last-of-type {
-    border-right-color: var(--border-color, $border-color);
-}
-
-th span {
-    position: absolute;
-    display: inline-block;
-}
-  
-tr:nth-child(even) {
-    color: var(--text-alt-color, black);
-    background-color: var(--input-background-2, $input-background-2);
+table tr:hover,
+.selected:nth-child(even):hover
+{
+  background-color: var(--primary-color-hover, $primary-color-hover);
+  color: var(--primary-bg-font-color-hover, $primary-bg-font-color-hover);
+  cursor: pointer;
 }

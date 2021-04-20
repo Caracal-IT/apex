@@ -24,6 +24,7 @@ export class Grid extends HTMLElement {
         this.shadowRoot.innerHTML = `<style>${css}</style>`;
 
         this._content = document.createElement('div');
+        this._content.className = 'content';
         this.shadowRoot.appendChild(this._content);
         this._table = document.createElement('table');
         this._content.appendChild(this._table);
@@ -34,23 +35,55 @@ export class Grid extends HTMLElement {
             this.style.maxHeight = this.height;        
 
         await this.initItems();
+        
         this.render();
     }
 
     private render() {
+        this.createCaption();            
+        this.renderTable();
+    }
+
+    private renderTable() {
         this._table.innerHTML = '';
         this.createHeader();
-        this.createBody();
+        this.createBody();        
+    }
+    
+    private createCaption() {
+        var container = document.createElement('div');
+        var content = document.createElement('h2');
+
+        content.innerText = this.caption;
+
+        container.appendChild(content);
+        this.shadowRoot.prepend(container);
     }
 
-    private createHeader() {
+    private createHeader() {              
+        this.enforceColumns();
+
         const header = document.createElement('thead');
+        this._table.appendChild(header);
+        
         const row = document.createElement('tr');
         header.appendChild(row);
-        this._table.appendChild(header);
 
-        this.columns.forEach(c => this.createColumn(c, row));        
+        this.columns.forEach(c => this.createColumn(c, row));  
     }
+
+    private enforceColumns() {        
+        if(this.columns?.length > 0 || this._items?.length < 1) return;
+
+        this.columns = Object.keys(this._items[0]).map(this.createHeaderModel);
+    }
+
+    private createHeaderModel(header: string): Column {
+        return {
+          name: header,
+          caption: (header).replace(/([A-Z])/g, ' $1').trim()
+        };
+    }    
 
     private createColumn(column: any, row: HTMLTableRowElement){
         const col = document.createElement('th');
@@ -79,7 +112,7 @@ export class Grid extends HTMLElement {
             const a = this._items.sort(this.compare.bind(this, order, column.name));
 
             this._items =  a;
-            this.render();
+            this.renderTable();
         });
     }
 
@@ -91,7 +124,7 @@ export class Grid extends HTMLElement {
     }
 
     private createBody() {
-        const body = document.createElement('tbody');
+        var body = document.createElement('tbody');        
         this._table.appendChild(body);
 
         this._items.forEach(i => this.createRow(i, body));
@@ -112,20 +145,20 @@ export class Grid extends HTMLElement {
 
     private async initItems() {
         if(typeof this.items === 'string') {
-            if(this.items.indexOf('/') === -1)
-                this._items = this.ctx.model.getValue(this.items);
+            if(this.items.indexOf('/') === -1) 
+                this._items = this.ctx.model.getValue(this.items);            
             else if(this.items.length > 0) 
                 this._items = await this.ctx.http.fetch({url: this.items, method: 'GET'});
         }
 
         if(!this._items)
-            this._items = [];
+            this._items = [];          
     }
 }
 
 customElements.define('apx-grid', Grid);
 
 class Column {
-    cation: string;
+    caption: string;
     name: string;
 }
