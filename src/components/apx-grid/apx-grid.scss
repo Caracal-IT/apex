@@ -57,6 +57,12 @@
                     position: absolute;
                 }
 
+                &:last-of-type {
+                    .resizable {
+                        display: none;
+                    }
+                }
+
                 .resizable{
                     position: absolute;
                     top: 0;
