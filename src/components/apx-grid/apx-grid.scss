@@ -56,6 +56,20 @@
                 span {
                     position: absolute;
                 }
+
+                .resizable{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 5px;
+                    height: 100%;
+                    cursor: col-resize;
+                    user-select: none;
+                }
+                
+                .resizable:hover, .resizing {
+                    border-right: 2px solid var(--border-color, $input-background-4);
+                }
             }
 
             td {

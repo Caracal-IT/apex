@@ -3,6 +3,7 @@ import { Context } from 'caracal_polaris/dist/types/model/context.model';
 export class Grid extends HTMLElement {
     private _table: HTMLTableElement;
     private _content: HTMLDivElement;
+    private _isResizing = false;
 
     private _items = [];
    
@@ -16,6 +17,7 @@ export class Grid extends HTMLElement {
 
     searchColumn = '';
     searchDirection = 'asc';
+    
     
     constructor(){
         super();
@@ -92,18 +94,66 @@ export class Grid extends HTMLElement {
 
     private createColumn(column: any, row: HTMLTableRowElement){
         const col = document.createElement('th');
-        row.appendChild(col);
+        row.appendChild(col);        
+        col.style.width = column.width;
 
         let sortIcon = '';
 
-        if(this.searchColumn === column.name) {
+        if(this.searchColumn === column.name) 
             sortIcon = this.searchDirection === 'asc' ? '<span>&uarr;</span>' : '<span>&darr;</span>';
-        }
-
+        
         col.innerHTML = `${column.caption} ${sortIcon}`;
 
-        col.addEventListener('click', () => {
-            if(this.searchColumn !== column.name)
+        this.createResizeHandler(col, column);
+        col.addEventListener('click', this.sortHandler.bind(this, column));
+    }
+
+    private createResizeHandler(header, column) {
+        const resizeHandle = document.createElement('div');
+        resizeHandle.classList.add('resizable');
+        header.appendChild(resizeHandle);
+
+        let x = 0;
+        let w = 0;
+
+        let mouseMoveHandler1;
+        let mouseUpHandler2;
+
+        const mouseDownHandler = function(e) {
+            this._isResizing = true;
+            x = e.clientX;
+
+            const styles = window.getComputedStyle(header);
+            w = parseInt(styles.width, 10);
+
+            document.addEventListener('mousemove', mouseMoveHandler1);
+            document.addEventListener('mouseup', mouseUpHandler2);
+        };
+
+        const mouseMoveHandler = function(e) {
+            const dx = e.clientX - x;
+            header.style.width = `${w + dx}px`;
+
+            column.width = `${w + dx}px`;
+        };
+
+        const mouseUpHandler = function() {
+            document.removeEventListener('mousemove', mouseMoveHandler1);
+            document.removeEventListener('mouseup', mouseUpHandler2);
+
+            setTimeout(() => this._isResizing = false, 0); 
+        };
+
+        mouseMoveHandler1 = mouseMoveHandler.bind(this);
+        mouseUpHandler2 = mouseUpHandler.bind(this);
+
+        resizeHandle.addEventListener('mousedown', mouseDownHandler.bind(this));
+    }
+
+    private sortHandler(column) {
+        if(this._isResizing === true) return;
+
+        if(this.searchColumn !== column.name)
                 this.searchDirection = 'desc';
 
                 this.searchColumn = column.name;
@@ -118,7 +168,6 @@ export class Grid extends HTMLElement {
 
             this._items =  a;
             this.renderTable();
-        });
     }
 
     public compare(order: number, name: string, a: any, b: any) {        
