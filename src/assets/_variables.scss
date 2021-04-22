@@ -10,7 +10,11 @@ $primary-disabled-color: #888;
 $primary-font-disabled-color: white;
 
 $primary-color-selected: lighten($primary-color, 70%);
+$primary-color-selected-font: 292929;
 $primary-color-selected-alt: lighten($primary-color, 55%);
+$primary-color-selected-alt-font: #292929;
+
+
 
 $primary-color-hover: lighten($primary-color, 20%);
 $primary-bg-font-color-hover: lighten($primary-bg-font-color, 80%);

@@ -47,6 +47,8 @@
                         {"tag": "apx-button", "caption": "Login", "next": "details"}
                     ] 
                 },
+                {"tag": "hr"},
+                {"tag": "apx-filter" },
                 {"tag": "hr" },
                 {
                     "tag": "apx-grid", 

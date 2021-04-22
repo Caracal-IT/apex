@@ -1,0 +1,18 @@
+@import '../../assets/_variables.scss';
+
+* {
+    box-sizing: border-box;
+}
+
+:host {
+    display: block;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.content {
+    border-radius: 5px;
+    border: 1px solid var(--border-color, $border-color);
+    padding: 10px 20px;
+    background-color: var(--input-background-2, $input-background-2);;
+}

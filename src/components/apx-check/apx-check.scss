@@ -12,6 +12,7 @@ input + label {
 	background-color: var(--input-background, $input-background);
 	border: var(--border, $border);
 	padding: 9px;
+	margin-right: 5px;
 	border-radius: 3px;
 	display: inline-block;
 	position: relative;
@@ -33,4 +34,5 @@ label:last-of-type {
     color: var(--primary-font-color, $primary-font-color);
     vertical-align: top;
     top: 2px;
+	margin-right: 5px;
 }

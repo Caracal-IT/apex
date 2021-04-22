@@ -26,9 +26,13 @@
 
             &.selected {
                 background-color: var(--primary-color-selected, $primary-color-selected);
+                color: var(--primary-color-selected-font, $primary-color-selected-font);
             }
             
-            &.selected:nth-child(even){background-color: var(--primary-color-selected-alt, $primary-color-selected-alt);}
+            &.selected:nth-child(even){
+                background-color: var(--primary-color-selected-alt, $primary-color-selected-alt);
+                color: var(--primary-color-selected-alt-font, $primary-color-selected-alt-font);
+            }
             
             &:hover,
             &.selected:nth-child(even):hover
@@ -81,6 +85,13 @@
             td {
                 &.select-item {
                     width: 25px;
+
+                    apx-check {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        overflow: hidden;
+                    }
                 }
             }
         }

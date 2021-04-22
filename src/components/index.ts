@@ -8,3 +8,4 @@ import './apx-input/apx-input';
 import './apx-label/apx-label';
 import './apx-radio/apx-radio';
 import './apx-switch/apx-switch';
+import './apx-filter/apx-filter';

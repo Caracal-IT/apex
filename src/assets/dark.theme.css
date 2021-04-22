@@ -13,6 +13,12 @@
     --primary-font-disabled-color: whitesmoke;
     --primary-color-hover: plum;
     --primary-bg-font-color-hover: #292929;
+
+    --primary-color-selected: #fda5fd;
+    --primary-color-selected-font: #292929;
+
+    --primary-color-selected-alt: rgb(217, 10, 245);
+    --primary-color-selected-alt-font: #ddd;
     
     --border-color: #C0C0C0;
     --border: 1px solid #C0C0C0;

@@ -13,6 +13,11 @@
     --primary-font-disabled-color: #fff;
     --primary-color-hover: #e600e6;
     --primary-bg-font-color-hover: #292929;
+
+    --primary-color-selected: #fda5fd;
+    --primary-color-selected-font: #292929;
+    --primary-color-selected-alt: #c593c5;
+    --primary-color-selected-alt-font: #f5f5f5;
     
     --border-color: #686868;
     --border: 1px solid #686868;
