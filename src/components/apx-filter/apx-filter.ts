@@ -6,6 +6,8 @@ export class Filter extends HTMLElement {
     caption: string;
     id: string;
 
+    fields: [];
+
     _field: any;
 
 
@@ -45,14 +47,7 @@ export class Filter extends HTMLElement {
         this._field.caption = 'Field';
         this._field.id = `${this.id}_field`;
 
-        this._field.items = [
-            {"caption": "Combo 1", "value": "combo1"},
-            {"caption": "Combo 2", "value": "combo2"},
-            {"caption": "Combo 3", "value": "combo3"},
-            {"caption": "Combo 1 A", "value": "combo1A"},
-            {"caption": "Combo 2 A", "value": "combo2A"},
-            {"caption": "Combo 2 B", "value": "combo2B"}
-        ];
+        this._field.items = [...this.fields];
 
         this._content.appendChild(this._field);
     }

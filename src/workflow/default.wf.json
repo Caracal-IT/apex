@@ -48,7 +48,18 @@
                     ] 
                 },
                 {"tag": "hr"},
-                {"tag": "apx-filter", "caption": "Filter" },
+                {
+                    "tag": "apx-filter", 
+                    "caption": "Filter",
+                    "fields": [
+                        {"caption": "Combo 1", "value": "combo1"},
+                        {"caption": "Combo 2", "value": "combo2"},
+                        {"caption": "Combo 3", "value": "combo3"},
+                        {"caption": "Combo 1 A", "value": "combo1A"},
+                        {"caption": "Combo 2 A", "value": "combo2A"},
+                        {"caption": "Combo 2 B", "value": "combo2B"}
+                    ]
+                },
                 {"tag": "hr" },
                 {
                     "tag": "apx-grid", 
