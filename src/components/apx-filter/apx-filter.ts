@@ -25,6 +25,8 @@ export class Filter extends HTMLElement {
         this._content = document.createElement('div');
         this._content.className = 'content';
         this.shadowRoot.appendChild(this._content);
+
+        this._field = document.createElement("apx-combo");
     }
 
     connectedCallback() {
@@ -42,7 +44,6 @@ export class Filter extends HTMLElement {
     }
 
     createFieldCombo() {
-        this._field = document.createElement("apx-combo");
         this._field.ctx = this.ctx;
         this._field.caption = 'Field';
         this._field.id = `${this.id}_field`;
