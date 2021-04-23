@@ -5,6 +5,7 @@ export class Filter extends HTMLElement {
     ctx: Context;
     caption: string;
     id: string;
+    next: string;
 
     fields: [];
 
@@ -12,7 +13,7 @@ export class Filter extends HTMLElement {
 
 
     get value() { return {field: this._field.value}; }
-    set value(value) { this._field.value = value.field; }
+    set value(value) { this._field.value = value.field??''; }
 
     private _content: HTMLDivElement;
 
@@ -82,6 +83,7 @@ export class Filter extends HTMLElement {
         const button: any = document.createElement("apx-button");
         button.ctx = this.ctx;
         button.caption = 'Filter';
+        button.next = this.next;
 
         this._content.appendChild(button);
     }
