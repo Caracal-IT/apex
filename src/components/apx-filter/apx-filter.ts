@@ -4,7 +4,14 @@ import { Context } from 'caracal_polaris/dist/types/model/context.model';
 export class Filter extends HTMLElement {
     ctx: Context;
     caption: string;
-    
+    id: string;
+
+    _field: any;
+
+
+    get value() { return {field: this._field.value}; }
+    set value(value) { this._field.value = value.field; }
+
     private _content: HTMLDivElement;
 
     constructor(){
@@ -33,11 +40,12 @@ export class Filter extends HTMLElement {
     }
 
     createFieldCombo() {
-        const combo: any = document.createElement("apx-combo");
-        combo.ctx = this.ctx;
-        combo.caption = 'Field';
+        this._field = document.createElement("apx-combo");
+        this._field.ctx = this.ctx;
+        this._field.caption = 'Field';
+        this._field.id = `${this.id}_field`;
 
-        combo.items = [
+        this._field.items = [
             {"caption": "Combo 1", "value": "combo1"},
             {"caption": "Combo 2", "value": "combo2"},
             {"caption": "Combo 3", "value": "combo3"},
@@ -46,30 +54,32 @@ export class Filter extends HTMLElement {
             {"caption": "Combo 2 B", "value": "combo2B"}
         ];
 
-        this._content.appendChild(combo);
+        this._content.appendChild(this._field);
     }
 
     createFieldCombo2() {
-        const combo: any = document.createElement("apx-combo");
-        combo.ctx = this.ctx;
-        combo.caption = 'Operator';
+        const operator: any = document.createElement("apx-combo");
+        operator.ctx = this.ctx;
+        operator.caption = 'Operator';
+        operator.id = `${this.id}_condition`;
 
-        combo.items = [
+        operator.items = [
             {"caption": "Greater", "value": "greater"},
             {"caption": "Smaller", "value": "smaller"},
             {"caption": "Equal", "value": "equal"},
             {"caption": "Between", "value": "Between"}
         ];
 
-        this._content.appendChild(combo);
+        this._content.appendChild(operator);
     }
 
     createFieldDate() {
-        const date: any = document.createElement("apx-date");
-        date.ctx = this.ctx;
-        date.caption = 'Search Value';
+        const valueInput: any = document.createElement("apx-date");
+        valueInput.ctx = this.ctx;
+        valueInput.caption = 'Search Value';
+        valueInput.id = `${this.id}_value`;
 
-        this._content.appendChild(date);
+        this._content.appendChild(valueInput);
     }
 
     createButton() {

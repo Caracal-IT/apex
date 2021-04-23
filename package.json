@@ -1,6 +1,6 @@
 {
   "name": "caracal_apex",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "The web components for caracal polaris workflow.",
   "repository": "https://github.com/Caracal-IT/polaris",
   "main": "dist/index.js",
@@ -25,7 +25,7 @@
   "author": "E.L. Mare",
   "license": "MIT",
   "devDependencies": {
-    "@webcomponents/webcomponentsjs": "^2.4.3",
+    "@webcomponents/webcomponentsjs": "^2.4.4",
     "caracal_polaris": "^1.1.1",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
