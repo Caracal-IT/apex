@@ -48,7 +48,7 @@
                     ] 
                 },
                 {"tag": "hr"},
-                {"tag": "apx-filter" },
+                {"tag": "apx-filter", "caption": "Filter" },
                 {"tag": "hr" },
                 {
                     "tag": "apx-grid", 

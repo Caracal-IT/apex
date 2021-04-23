@@ -2,7 +2,7 @@
     --background: white;
     
     --input-background: #f5f5f5;
-    --input-background-2: silver;
+    --input-background-2: #d7d7d7;
     --input-background-3: #B7B7B7;
     --input-background-4: #888;
     
@@ -12,12 +12,12 @@
     --primary-disabled-color: #888;
     --primary-font-disabled-color: #fff;
     --primary-color-hover: #e600e6;
-    --primary-bg-font-color-hover: #292929;
+    --primary-bg-font-color-hover: #f5f5f5;
 
-    --primary-color-selected: #fda5fd;
+    --primary-color-selected: #f8b8f8;
     --primary-color-selected-font: #292929;
-    --primary-color-selected-alt: #c593c5;
-    --primary-color-selected-alt-font: #f5f5f5;
+    --primary-color-selected-alt: #94449475;
+    --primary-color-selected-alt-font: #292929;
     
     --border-color: #686868;
     --border: 1px solid #686868;

@@ -113,7 +113,7 @@ ul {
     background-color: var(--input-background, $input-background);
     max-height: 0;
     height: 0;
-    width: calc(100% - 2.5rem - 3px);
+    width: calc(100% - 2.5rem);
     overflow-y: auto;    
     transition: max-height, height .4s ease-in-out; 
     z-index: 999999999999999;   

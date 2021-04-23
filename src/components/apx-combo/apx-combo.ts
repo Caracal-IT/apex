@@ -126,6 +126,7 @@ export class Combo extends HTMLElement {
     }
 
     private inputFocusHandler() {
+        this._itemContainer.style.width = `${this._input.getBoundingClientRect().width - 3}px`;
         this._isOpen = true;
         const size = this._itemContainer.parentElement.getBoundingClientRect();
         const isDown = size.bottom < (window.innerHeight - 110);

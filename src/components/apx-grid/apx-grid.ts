@@ -53,6 +53,9 @@ export class Grid extends HTMLElement {
     }
     
     private createCaption() {
+        if(this.caption?.length < 1)
+            return;
+
         var container = document.createElement('div');
         var content = document.createElement('h2');
 

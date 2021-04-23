@@ -10,6 +10,12 @@
     padding: 0;
 }
 
+h2 {
+    color: var(--primary-font-color, $primary-font-color);
+    padding: 0;
+    margin: 5px 0;
+}
+
 .content {
     border-radius: 5px;
     border: 1px solid var(--border-color, $border-color);
@@ -78,7 +84,7 @@
                 }
                 
                 .resizable:hover, .resizing {
-                    border-right: 2px solid var(--border-color, $input-background-4);
+                    border-right: 2px solid var(--border-color-4, $input-background-4);
                 }
             }
 
