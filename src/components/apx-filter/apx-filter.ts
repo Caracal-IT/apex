@@ -7,6 +7,8 @@ export class Filter extends HTMLElement {
     id: string;
     next: string;
 
+    private _inputHandler: any;
+
     fields: [];
 
     _field: any;
@@ -28,6 +30,7 @@ export class Filter extends HTMLElement {
         this.shadowRoot.appendChild(this._content);
 
         this._field = document.createElement("apx-combo");
+        this._inputHandler = this.inputHandler.bind(this);
     }
 
     connectedCallback() {
@@ -36,7 +39,14 @@ export class Filter extends HTMLElement {
         this.createFieldCombo2();
         this.createFieldDate();
         this.createButton();
+
+        this._field.addEventListener('input', this._inputHandler);
     }
+
+    disconnectedCallback() { 
+        this._field.removeEventListener('input', this._inputHandler);
+    }
+    
 
     createHeader() {
         const header = document.createElement("h2"); 
@@ -82,10 +92,16 @@ export class Filter extends HTMLElement {
     createButton() {
         const button: any = document.createElement("apx-button");
         button.ctx = this.ctx;
+        button.id = `${this.id}_button`
         button.caption = 'Filter';
         button.next = this.next;
 
         this._content.appendChild(button);
+    }
+
+    private inputHandler(e) {
+        this.value.field = e.target.value;
+        this.ctx.model.setValue(this.id, this.value);
     }
 }
 

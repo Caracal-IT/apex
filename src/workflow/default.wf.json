@@ -51,6 +51,8 @@
                 {
                     "tag": "apx-filter", 
                     "caption": "Filter",
+                    "id": "page_filter",
+                    "next": "apply-filter",
                     "fields": [
                         {"caption": "Combo 1", "value": "combo1"},
                         {"caption": "Combo 2", "value": "combo2"},
@@ -87,6 +89,12 @@
                  ] 
                 }                   
             ]        
-        }
+        },
+        {
+            "name": "apply-filter",
+            "type": "code-activity",
+            "next": "landing",
+            "expression": "console.dir(ctx.model.getValue('page_filter.field'));"
+          }
     ]
 }
