@@ -42,8 +42,16 @@ export class Grid extends HTMLElement {
     }
 
     private render() {
-        this.createCaption();            
-        this.renderTable();
+        this.createCaption();    
+        
+        if(this._items?.length > 0)
+            this.renderTable();
+        else 
+            this.renderNoItems();
+    }
+
+    renderNoItems() {
+        this._table.innerHTML = '<h2 class="no-items">No Items</h2>';
     }
 
     private renderTable() {

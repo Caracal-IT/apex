@@ -20,6 +20,15 @@ h2 {
     border-radius: 5px;
     border: 1px solid var(--border-color, $border-color);
 
+    .no-items {
+        display: block;
+        height: 100%;
+        padding: 5px 10px;
+        margin: 0;
+        background-color: var(--input-background-2, $input-background-2);
+        text-align: center;
+    }
+
     table {
         border-collapse: collapse;
         width: 100%;
