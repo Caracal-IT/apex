@@ -1,6 +1,6 @@
 {
   "name": "caracal_apex",
-  "version": "2.4.1",
+  "version": "2.5.1",
   "description": "The web components for caracal polaris workflow.",
   "repository": "https://github.com/Caracal-IT/polaris",
   "main": "dist/index.js",
