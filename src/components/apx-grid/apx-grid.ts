@@ -205,16 +205,19 @@ export class Grid extends HTMLElement {
     }
 
     private createSelectCell(item, row: HTMLTableRowElement) {
-        if(!this.selectable || item.isSelectable == false) return;
+        if(!this.selectable) return;
 
+        const cell = this.createCell('', row);
+        cell.className = 'select-item';
+
+        if(item.isSelectable == false)
+            return;
+            
         const ckb: any = document.createElement('apx-check');
         ckb.ctx = this.ctx;
         ckb.id = item.id;
 
         row.onclick = (e) => this.selectRow(e, ckb, row, item);
-        
-        const cell = this.createCell('', row);
-        cell.className = 'select-item';
         cell.appendChild(ckb);
     }
 
