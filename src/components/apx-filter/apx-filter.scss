@@ -22,8 +22,7 @@ h2 {
     border-radius: 5px;
     border: 1px solid var(--border-color, $border-color);
     padding: 5px 10px;
-    background-color: var(--input-background-2, $input-background-2);
-    height: 150px;
+    background-color: var(--input-background-2, $input-background-2);   
 
     apx-combo {
         display: inline-block;
