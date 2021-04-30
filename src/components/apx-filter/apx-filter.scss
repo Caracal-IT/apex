@@ -16,6 +16,7 @@ h2 {
     margin: 0;
 }
 
+
 .content {
     display: block;
     border-radius: 5px;
@@ -43,5 +44,11 @@ h2 {
     apx-button {
         display: block;
         float: right;
+    }
+
+    &::after {
+        content: "";
+        clear: both;
+        display: table;
     }
 }
