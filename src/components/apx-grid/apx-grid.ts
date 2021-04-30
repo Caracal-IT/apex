@@ -205,7 +205,7 @@ export class Grid extends HTMLElement {
     }
 
     private createSelectCell(item, row: HTMLTableRowElement) {
-        if(!this.selectable) return;
+        if(!this.selectable || item.isSelectable == false) return;
 
         const ckb: any = document.createElement('apx-check');
         ckb.ctx = this.ctx;
