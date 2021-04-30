@@ -85,9 +85,27 @@ export class Grid extends HTMLElement {
         if(this.selectable) {
             const col = document.createElement('th');
             row.appendChild(col);
+
+            const ckb: any = document.createElement('apx-check');
+            ckb.ctx = this.ctx;
+            ckb.id = 'select_all';
+
+            ckb.onclick = (e) => this.selectAll(e, ckb);
+            col.appendChild(ckb);
         }
 
         this.columns.forEach(c => this.createColumn(c, row));  
+    }
+
+    private selectAll(e: Event, ckb) {
+        ckb.value = !ckb.value;
+
+        this._table.querySelectorAll('apx-check').forEach((c:any) => { 
+            c.value = ckb.value;
+            c.closest('tr').className = ckb.value ? 'selected': '';
+        });
+
+        e.preventDefault();
     }
 
     private enforceColumns() {        
@@ -212,7 +230,7 @@ export class Grid extends HTMLElement {
 
         if(item.isSelectable == false)
             return;
-            
+
         const ckb: any = document.createElement('apx-check');
         ckb.ctx = this.ctx;
         ckb.id = item.id;
