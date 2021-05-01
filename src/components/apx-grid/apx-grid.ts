@@ -108,8 +108,8 @@ export class Grid extends HTMLElement {
             c.closest('tr').className = ckb.value ? 'selected': '';
         });
 
-        this._items.filter(i => i.isSelectable != false && i.clientWF?.length < 1)
-                   .forEach(i => i.selected = ckb.value);
+        var filtered = this._items.filter(i => i.isSelectable != false && i.clientWF === undefined && (i.clientWf??'').length < 1);
+        filtered.forEach(i => i.selected = ckb.value);
 
         e.preventDefault();
     }
