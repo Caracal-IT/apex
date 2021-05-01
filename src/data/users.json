@@ -2,7 +2,7 @@
     { "id": 1, "firstName": "Name 6", "surname": "Surname 1" },
     { "id": 2, "firstName": "Name 5", "surname": "Surname 6" },
     { "id": 3, "firstName": "Name 4", "surname": "Surname 4" },
-    { "id": 4, "firstName": "Name 3", "surname": "Surname 3" },
+    { "id": 4, "firstName": "Name 3", "surname": "Surname 3", "clientWF": "" },
     { "id": 5, "firstName": "Name 2", "surname": "Surname 5", "clientWF": "userDetails" },
     { "id": 6, "firstName": "Name 1", "surname": "Surname 2" }
 ]

@@ -108,10 +108,15 @@ export class Grid extends HTMLElement {
             c.closest('tr').className = ckb.value ? 'selected': '';
         });
 
-        var filtered = this._items.filter(i => i.isSelectable != false && i.clientWF === undefined && (i.clientWf??'').length < 1);
+        var filtered = this._items.filter(this.itemIsCheckBox);
         filtered.forEach(i => i.selected = ckb.value);
 
         e.preventDefault();
+    }
+
+    private itemIsCheckBox(item) {
+        return item.isSelectable != false 
+            && !item.clientWF;
     }
 
     private enforceColumns() {        
