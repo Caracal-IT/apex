@@ -12,6 +12,7 @@ export class Grid extends HTMLElement {
     columns: Array<Column>;
     items: []|string;
     height: string;
+    editName: string = '__editId__';
 
     ctx: Context;    
 
@@ -257,7 +258,7 @@ export class Grid extends HTMLElement {
         link.href = '#';
         link.text = item.clientWF;
         link.onclick = (e) => {
-            this.ctx.model.setValue(`${this.id}__selectedItem`, item.id);
+            this.ctx.model.setValue(this.editName, item.id);
             this.ctx.wf.goto(item.clientWF);
             e.preventDefault();
         }
