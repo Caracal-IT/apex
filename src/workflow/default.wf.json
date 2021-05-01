@@ -95,6 +95,12 @@
             "type": "code-activity",
             "next": "landing",
             "expression": "console.dir(ctx.model.getValue('page_filter.field'));"
-          }
+        },
+        {
+            "name": "userDetails",
+            "type": "ipc-activity",
+            "process" : "userDetails",
+            "next": ""
+        }
     ]
 }

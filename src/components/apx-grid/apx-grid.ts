@@ -82,19 +82,21 @@ export class Grid extends HTMLElement {
         const row = document.createElement('tr');
         header.appendChild(row);
 
-        if(this.selectable) {
-            const col = document.createElement('th');
-            row.appendChild(col);
-
-            const ckb: any = document.createElement('apx-check');
-            ckb.ctx = this.ctx;
-            ckb.id = 'select_all';
-
-            ckb.onclick = (e) => this.selectAll(e, ckb);
-            col.appendChild(ckb);
-        }
+        if(this.selectable) this.createSelectAll(row);
 
         this.columns.forEach(c => this.createColumn(c, row));  
+    }
+
+    private createSelectAll(row: HTMLTableRowElement) {
+        const col = document.createElement('th');
+        row.appendChild(col);
+
+        const ckb: any = document.createElement('apx-check');
+        ckb.ctx = this.ctx;
+        ckb.id = 'select_all';
+
+        ckb.onclick = (e) => this.selectAll(e, ckb);
+        col.appendChild(ckb);
     }
 
     private selectAll(e: Event, ckb) {
@@ -220,7 +222,10 @@ export class Grid extends HTMLElement {
         const row = document.createElement('tr');
         body.appendChild(row);
         
-        this.createSelectCell(item, row);
+        if(item.clientWF && item.clientWF.length > 0)
+            this.createEditCell(item, row);
+        else
+            this.createSelectCell(item, row);
 
         this.columns.forEach(c => this.createCell(item[c.name], row)); 
     }
@@ -240,6 +245,23 @@ export class Grid extends HTMLElement {
 
         row.onclick = (e) => this.selectRow(e, ckb, row, item);
         cell.appendChild(ckb);
+    }
+    
+    private createEditCell(item, row: HTMLTableRowElement){
+        if(!this.selectable) return;
+
+        const cell = this.createCell('', row);
+        cell.className = 'select-item';
+
+        const link = document.createElement('a');
+        link.href = '#';
+        link.text = item.clientWF;
+        link.onclick = (e) => {
+            this.ctx.wf.goto(item.clientWF);
+            e.preventDefault();
+        }
+
+        cell.appendChild(link);
     }
 
     private selectRow(e: Event, ckb, row, item) {

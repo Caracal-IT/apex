@@ -1,0 +1,19 @@
+{
+    "name" : "userDetails",
+    "activities": [
+        {
+            "name": "start",
+            "type": "page-activity",            
+            "controls": [
+                {"tag" : "apx-header", "caption": "User" },
+                {"tag": "apx-button", "caption": "Home", "next": "default"}
+            ]
+        },
+        {
+            "name": "default",
+            "type": "ipc-activity",
+            "process" : "default",
+            "next": ""
+        }
+    ]
+}
