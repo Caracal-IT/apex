@@ -257,6 +257,7 @@ export class Grid extends HTMLElement {
         link.href = '#';
         link.text = item.clientWF;
         link.onclick = (e) => {
+            this.ctx.model.setValue(`${this.id}__selectedItem`, item.id);
             this.ctx.wf.goto(item.clientWF);
             e.preventDefault();
         }
